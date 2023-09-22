@@ -3,6 +3,8 @@
 #  29.01.2009 by Aleksi Lehtonen
 
 #  update functions 14.10.2019 by Boris Tupek
+
+
 ################################################################################
 
 
@@ -14,14 +16,14 @@ foliage.litter <- function(Mf, spec, reg, min) {
     return(Mf*0.213) }
   if (spec==1 & min==0) {
     return(Mf*0.33) }
-  
+
   if (spec==2) {
     if (reg==1) {
           return(Mf*0.139)}
     if (reg==2) {
           return(Mf*0.1)}
   }
-  
+
     if (spec==3) {
            return(Mf*0.79)}
 }
@@ -31,7 +33,7 @@ branch.litter <- function(Mb, spec) {
   if (spec==1) {
           return(Mb*0.02)}
   if (spec==2) {
-          return(Mb*0.0125)}  
+          return(Mb*0.0125)}
   if (spec==3) {
           return(Mb*0.0135)}
 }
@@ -40,7 +42,7 @@ stump.litter <- function(Mst, spec) {
   if (spec==1) {
           return(Mst*0.0029)}
   if (spec==2) {
-          return(0)}  
+          return(0)}
   if (spec==3) {
           return(Mst*0.0001)}
 }
@@ -49,7 +51,7 @@ root.litter <- function(Mr, spec) {
   if (spec==1) {
           return(Mr*0.0184)}
   if (spec==2) {
-          return(Mr*0.0125)}  
+          return(Mr*0.0125)}
   if (spec==3) {
           return(Mr*0.0135)}
 }
@@ -58,7 +60,7 @@ bark.litter <- function(Ms, spec) {
   if (spec==1) {
           return(Ms*0.0052)}
   if (spec==2) {
-          return(Ms*0.0027)}  
+          return(Ms*0.0027)}
   if (spec==3) {
           return(Ms*0.0029)}
 }
@@ -71,7 +73,7 @@ fineroot.litter.reg <- function(Mf,reg) {
   if (reg==1) {
           return(Mf*0.85)}
   if (reg==2) {
-          return(Mf*0.5)} 
+          return(Mf*0.5)}
 }
 #
 # Based on assumptions
@@ -107,7 +109,7 @@ foliage.AWEN <- function(Lf, spec) {
   ma <- (1:length(Lf))[spec==1]
   ku <- (1:length(Lf))[spec==2]
   ko <- (1:length(Lf))[spec==3]
-  
+
 fol.AWEN[,1][ma] <- 0.518*Lf[ma]
 fol.AWEN[,1][ku] <- 0.4826*Lf[ku]
 fol.AWEN[,1][ko] <- 0.4079*Lf[ko]
@@ -124,7 +126,7 @@ fol.AWEN[,4][ma] <- 0.216*Lf[ma]
 fol.AWEN[,4][ku] <- 0.3199*Lf[ku]
 fol.AWEN[,4][ko] <- 0.2951*Lf[ko]
 
-  return(fol.AWEN)        
+  return(fol.AWEN)
 }
 
 fineroot.AWEN <- function(Lfr, spec) {
@@ -133,7 +135,7 @@ fineroot.AWEN <- function(Lfr, spec) {
   ma <- (1:length(Lfr))[spec==1]
   ku <- (1:length(Lfr))[spec==2]
   ko <- (1:length(Lfr))[spec==3]
-  
+
 fr.AWEN[,1][ma] <- 0.5791*Lfr[ma]
 fr.AWEN[,1][ku] <- 0.5508*Lfr[ku]
 fr.AWEN[,1][ko] <- 0.4079*Lfr[ko]
@@ -141,7 +143,7 @@ fr.AWEN[,1][ko] <- 0.4079*Lfr[ko]
 fr.AWEN[,2][ma] <- 0.1286*Lfr[ma]
 fr.AWEN[,2][ku] <- 0.1331*Lfr[ku]
 fr.AWEN[,2][ko] <- 0.198*Lfr[ko]
-  
+
 fr.AWEN[,3][ma] <- 0.0643*Lfr[ma]
 fr.AWEN[,3][ku] <- 0.0665*Lfr[ku]
 fr.AWEN[,3][ko] <- 0.099*Lfr[ko]
@@ -157,7 +159,7 @@ fr.AWEN[,4][ko] <- 0.2951*Lfr[ko]
 
 branches.AWEN <- function(Lb) {
    fb.AWEN <- matrix(0,nrow=length(Lb), ncol=4)
-   
+
 a <- c(0.4763,0.4933,0.4289,0.5068,0.4607,0.5047,0.4642,0.5307,0.5256,0.4661,0.5060,
 0.4941,0.4848,0.4158,0.4605,0.4423,0.4811,0.4434,0.5141,0.4312,0.4867,0.3997,0.4758,0.4741,0.4996)
 
@@ -174,7 +176,7 @@ fb.AWEN[,1] <- mean(a)*Lb
 fb.AWEN[,2] <- mean(w)*Lb
 fb.AWEN[,3] <- mean(e)*Lb
 fb.AWEN[,4] <- mean(n)*Lb
-   
+
 return(fb.AWEN)
 
  }
@@ -185,7 +187,7 @@ stem.AWEN <- function(Lst, spec) {
   ma <- (1:length(Lst))[spec==1]
   ku <- (1:length(Lst))[spec==2]
   ko <- (1:length(Lst))[spec==3]
-  
+
 st.AWEN[,1][ma] <- 0.5*(0.66+0.68)*Lst[ma]
 st.AWEN[,1][ku] <- 0.5*(0.63+0.7)*Lst[ku]
 st.AWEN[,1][ko] <- 0.5*(0.65+0.78)*Lst[ko]
@@ -227,7 +229,7 @@ grass.AWEN[,4][b] <- 0.025*Lg[b]
 ### Note this is twig (varpu)
 twig.AWEN <- function(Lt) {
  twig.AWEN <- matrix(0,nrow=length(Lt), ncol=4)
- 
+
 twig.AWEN[,1] <- 0.557*Lt
 twig.AWEN[,2] <- 0.225264*Lt
 twig.AWEN[,3] <- 0.086736*Lt
@@ -240,7 +242,7 @@ twig.AWEN[,4] <- 0.131*Lt
 ### Note this is lichen (jäkälä)
 lichen.AWEN <- function(Ll) {
  lichen.AWEN <- matrix(0,nrow=length(Ll), ncol=4)
- 
+
 lichen.AWEN[,1] <- 0.836*Ll
 lichen.AWEN[,2] <- 0.080864*Ll
 lichen.AWEN[,3] <- 0.031136*Ll
@@ -251,7 +253,7 @@ return(lichen.AWEN)
 ### Note this is moss (sammal)
 moss.AWEN <- function(Lm) {
  moss.AWEN <- matrix(0,nrow=length(Lm), ncol=4)
- 
+
 moss.AWEN[,1] <- 0.736*Lm
 moss.AWEN[,2] <- 0.096026*Lm
 moss.AWEN[,3] <- 0.036974*Lm
@@ -317,7 +319,7 @@ dwarfshrub.litter <- function(mass, comp) {
 # tässä ehdotus, en tiedä onko tarpeellinen.
 
 # Tutkin Heljä-Siskon kairanäytteitä ICP level2 koealoilta. Totaali maanalainen (jonka mukaan cover biomassa mallit tehtiin) sisältää 7 % hienojuuria ja 93% maavarsia. Hienojuurista 13% on kuolleita ja 87% eläviä. Maavarsista 2.5 % on kuolleita. Mitä mieltä olet, pitääkö tämä kuolleiden osuus poistaa aineistosta.
-# Maija 
+# Maija
 
 
 bryof.litter <- function(mass) {
