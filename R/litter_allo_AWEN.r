@@ -1,15 +1,23 @@
 
-#  This piece of code defines litter production rates
+#  This piece of code defines litter production rates and the AWEN conversion factors to feed the Yasso decomposition model (5 pools)
+
+
 #  29.01.2009 by Aleksi Lehtonen
 
 #  update functions 14.10.2019 by Boris Tupek
 
 # new update by Lorenzo Menichetti, Sept-Octo 2023
 
-################################################################################
+# updated according to Lehtonen et al 2016 (Tupek et al  2015)
 
-
-#updated according to Lehtonen et al 2016 (Tupek et al  2015)
+#' Calculates foliage litter
+#'
+#' @param Mf
+#' @param spec tree species
+#' @param reg
+#' @param min
+#' @return
+#' @examples
 foliage.litter <- function(Mf, spec, reg, min) {
   if (spec==1 & reg==1 & min==1) {
     return(Mf*0.278)}
@@ -29,7 +37,12 @@ foliage.litter <- function(Mf, spec, reg, min) {
            return(Mf*0.79)}
 }
 
-
+#' Calculates branch litter
+#'
+#' @param Mb
+#' @param spec tree species
+#' @return
+#' @examples
 branch.litter <- function(Mb, spec) {
   if (spec==1) {
           return(Mb*0.02)}
@@ -38,7 +51,15 @@ branch.litter <- function(Mb, spec) {
   if (spec==3) {
           return(Mb*0.0135)}
 }
+
+
 # the bark of the stump
+#' Calculates stump bark litter
+#'
+#' @param Mst
+#' @param spec tree species
+#' @return
+#' @examples
 stump.litter <- function(Mst, spec) {
   if (spec==1) {
           return(Mst*0.0029)}
@@ -48,6 +69,12 @@ stump.litter <- function(Mst, spec) {
           return(Mst*0.0001)}
 }
 
+#' Calculates root litter
+#'
+#' @param Mr
+#' @param spec tree species
+#' @return
+#' @examples
 root.litter <- function(Mr, spec) {
   if (spec==1) {
           return(Mr*0.0184)}
@@ -57,6 +84,12 @@ root.litter <- function(Mr, spec) {
           return(Mr*0.0135)}
 }
 
+#' Calculates bark litter
+#'
+#' @param Ms
+#' @param spec tree species
+#' @return
+#' @examples
 bark.litter <- function(Ms, spec) {
   if (spec==1) {
           return(Ms*0.0052)}
@@ -66,10 +99,19 @@ bark.litter <- function(Ms, spec) {
           return(Ms*0.0029)}
 }
 
-fineroot.litter <- function(Mf) {
-  return(Mf*0.85)
-}
 
+
+
+# fineroot.litter <- function(Mf) {
+#   return(Mf*0.85)
+# }
+
+#' Calculates fine root litter
+#'
+#' @param Mf
+#' @param spec tree species
+#' @return
+#' @examples
 fineroot.litter.reg <- function(Mf,reg) {
   if (reg==1) {
           return(Mf*0.85)}
@@ -80,6 +122,12 @@ fineroot.litter.reg <- function(Mf,reg) {
 # Based on assumptions
 #
 
+#' Calculates fine root litter with three different options based on tsum
+#'
+#' @param Mf
+#' @param tsum temperature sum
+#' @return
+#' @examples
 fineroot.litter.tsum <- function(Mfr, tsum) {
   if (tsum>=1200) {
           return(Mfr*0.85)}
@@ -93,17 +141,31 @@ fineroot.litter.tsum <- function(Mfr, tsum) {
 
 
 #########################
-### here function for carbon!!!
-
+#' Converts biomass in carbon
+#'
+#' @param M
+#' @return
+#' @examples
 carbon <- function(M) {
   return(M*0.5)
 }
+
+
+
+
 
 ###############################################3
 ####################### HERE is a piece to calculate AWEN (acid, water, ethanol & non-solubles) for Yasso input
 ###########################
 
 # Note for Birch Betula pubenscens and brown leaves is used
+#########################
+#' Calculates the AWEN proportins of foliage biomass
+#'
+#' @param Lf leaves biomass
+#' @param spec tree species
+#' @return
+#' @examples
 foliage.AWEN <- function(Lf, spec) {
 
   fol.AWEN <- matrix(0,nrow=length(Lf), ncol=4)
@@ -130,6 +192,13 @@ fol.AWEN[,4][ko] <- 0.2951*Lf[ko]
   return(fol.AWEN)
 }
 
+
+#' Calculates the AWEN proportins of fine roots biomass
+#'
+#' @param Lfr fine roots biomass
+#' @param spec tree species
+#' @return
+#' @examples
 fineroot.AWEN <- function(Lfr, spec) {
 
   fr.AWEN <- matrix(0,nrow=length(Lfr), ncol=4)
@@ -155,9 +224,15 @@ fr.AWEN[,4][ko] <- 0.2951*Lfr[ko]
 
   return(fr.AWEN)
 }
+
+
 ## Branches are here
 # It seems that there is only valiues for pine (these are applied for others as well)
-
+#' Calculates the AWEN proportions of branches biomass
+#'
+#' @param Lb branches biomass
+#' @return
+#' @examples
 branches.AWEN <- function(Lb) {
    fb.AWEN <- matrix(0,nrow=length(Lb), ncol=4)
 
@@ -182,6 +257,12 @@ return(fb.AWEN)
 
  }
 
+#' Calculates the AWEN proportions of stems biomass
+#'
+#' @param Lst branches biomass
+#' @param spec tree species tree species
+#' @return
+#' @examples
 stem.AWEN <- function(Lst, spec) {
 
   st.AWEN <- matrix(0,nrow=length(Lst), ncol=4)
@@ -208,6 +289,12 @@ st.AWEN[,4][ko] <- 0.5*(0.32+0.22)*Lst[ko]
   return(st.AWEN)
 }
 
+#' Calculates the AWEN proportions of grass biomass
+#'
+#' @param Lg grass biomass
+#' @param above
+#' @return
+#' @examples
 grass.AWEN <- function(Lg, above) {
  grass.AWEN <- matrix(0,nrow=length(Lg), ncol=4)
   a <- (1:length(Lg))[above==1]
@@ -227,7 +314,12 @@ grass.AWEN[,4][b] <- 0.025*Lg[b]
 }
 
 
-### Note this is twig (varpu)
+
+#' Calculates the AWEN proportions of twig biomass
+#'
+#' @param Lt
+#' @return
+#' @examples
 twig.AWEN <- function(Lt) {
  twig.AWEN <- matrix(0,nrow=length(Lt), ncol=4)
 
@@ -235,12 +327,15 @@ twig.AWEN[,1] <- 0.557*Lt
 twig.AWEN[,2] <- 0.225264*Lt
 twig.AWEN[,3] <- 0.086736*Lt
 twig.AWEN[,4] <- 0.131*Lt
-
-
  return(twig.AWEN)
 }
 
 ### Note this is lichen (jäkälä)
+#' Calculates the AWEN proportions of lichens biomass
+#'
+#' @param Ll grass biomass
+#' @return
+#' @examples
 lichen.AWEN <- function(Ll) {
  lichen.AWEN <- matrix(0,nrow=length(Ll), ncol=4)
 
@@ -252,6 +347,11 @@ return(lichen.AWEN)
 }
 
 ### Note this is moss (sammal)
+#' Calculates the AWEN proportions of mosses biomass
+#'
+#' @param Lm grass biomass
+#' @return
+#' @examples
 moss.AWEN <- function(Lm) {
  moss.AWEN <- matrix(0,nrow=length(Lm), ncol=4)
 
@@ -262,7 +362,11 @@ moss.AWEN[,4] <- 0.131*Lm
 return(moss.AWEN)
 }
 
-
+#' Calculates the AWEN proportions of wheat biomass
+#'
+#' @param Lwheat wheat biomass
+#' @return
+#' @examples
 wheat.AWEN <- function(Lwheat) {
   wh.AWEN <- matrix(0,nrow=length(Lwheat), ncol=4)
 
@@ -274,7 +378,11 @@ wh.AWEN[,4] <- 0.131759*Lwheat
   return(wh.AWEN)
 }
 
-
+#' Calculates the AWEN proportions of barley biomass
+#'
+#' @param Lbarley barley biomass
+#' @return
+#' @examples
 barley.AWEN <- function(Lbarley) {
   bar.AWEN <- matrix(0,nrow=length(Lbarley), ncol=4)
 
@@ -286,7 +394,11 @@ bar.AWEN[,4] <- 0.075972*Lbarley
   return(bar.AWEN)
 }
 
-
+#' Calculates the AWEN proportions of cow dung biomass
+#'
+#' @param Lshit cow dung biomass
+#' @return
+#' @examples
 shit.AWEN <- function(Lshit) {
   shi.AWEN <- matrix(0,nrow=length(Lshit), ncol=4)
 
@@ -300,9 +412,14 @@ shi.AWEN[,4] <- 0.129199*Lshit
 
 
 ##############################################
-# Here adding understorey litter rations into file
+# Here adding understorey litter ratios into file
 ##############################################
-
+#' Calculates the biomass of the understorey dwarf shrubs
+#'
+#' @param mass
+#' @param comp
+#' @return
+#' @examples
 dwarfshrub.litter <- function(mass, comp) {
      if (comp=='abv'){
     return(0.37*mass) }
@@ -322,19 +439,41 @@ dwarfshrub.litter <- function(mass, comp) {
 # Tutkin Heljä-Siskon kairanäytteitä ICP level2 koealoilta. Totaali maanalainen (jonka mukaan cover biomassa mallit tehtiin) sisältää 7 % hienojuuria ja 93% maavarsia. Hienojuurista 13% on kuolleita ja 87% eläviä. Maavarsista 2.5 % on kuolleita. Mitä mieltä olet, pitääkö tämä kuolleiden osuus poistaa aineistosta.
 # Maija
 
-
+#' Calculates the biomass of the understorey bryophytes
+#'
+#' @param mass
+#' @return
+#' @examples
 bryof.litter <- function(mass) {
     return(0.417*mass)
 }
+
+#' Calculates the biomass of the understorey lichens
+#'
+#' @param mass
+#' @return
+#' @examples
 lichen.litter <- function(mass) {
     return(0.1*mass)
 }
+
+#' Calculates the biomass of the understorey grasses
+#'
+#' @param mass
+#' @return
+#' @examples
 grass.litter <- function(mass,comp) {
      if (comp=='abv'){
     return(0.33*mass) }
      if (comp=='bel'){
     return((1/1.7)*mass) }
- }
+}
+
+#' Calculates the biomass of the understorey herbs
+#'
+#' @param mass
+#' @return
+#' @examples
 herb.litter <- function(mass,comp){
      if (comp=='abv'){
     return(1*mass) }

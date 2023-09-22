@@ -1,0 +1,36 @@
+---
+title: "Notes_to_Boris"
+author: "Lorenzo Menichetti"
+date: "2023-09-22"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tree species
+To which species 1, 2, and 3 correspond?
+
+#function foliage.litter
+* what is Mf? Is some sort of mass (t/ha)? Mass of foliage from the allometries?
+* to which region correspond the "reg" parameter?
+* what is the "min" parameter?
+
+# functions branch.litter, stump.litter, root.litter, bark litter
+Again what is the mass parameter (is that mass)?
+
+# function fineroot.litter.tsum
+How does the tsom work? I mean, is that cumulative monthly in celsius degrees, right?
+
+# function shit.AWEN
+which kind of shit the shit.AWEN function works on? Is it cow?
+
+# function dwarfshrub.litter
+what is "mass"? Mass of what? What are the options "abs" and "bel"?
+
+# functions bryof.litter, lychen.litter, grass.litter, herb.litter
+as above, what is "mass"?
+
+# functions grass.litter and herb.litter
+what are the definitions of herb and grass?
