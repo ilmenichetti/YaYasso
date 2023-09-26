@@ -1,7 +1,6 @@
 
 #  This piece of code defines litter production rates and the AWEN conversion factors to feed the Yasso decomposition model (5 pools)
 
-
 #  29.01.2009 by Aleksi Lehtonen
 
 #  update functions 14.10.2019 by Boris Tupek
@@ -10,10 +9,12 @@
 
 # updated according to Lehtonen et al 2016 (Tupek et al  2015)
 
+# most functions should be in Silva fennica 2008 annd 2009, Repola
+
 #' Calculates foliage litter
 #'
-#' @param Mf
-#' @param spec tree species
+#' @param Mf mass of foliage (unitless, usually in Mg ha$^{-1}$)
+#' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves)
 #' @param reg
 #' @param min
 #' @return
@@ -32,15 +33,14 @@ foliage.litter <- function(Mf, spec, reg, min) {
     if (reg==2) {
           return(Mf*0.1)}
   }
-
     if (spec==3) {
            return(Mf*0.79)}
 }
 
 #' Calculates branch litter
 #'
-#' @param Mb
-#' @param spec tree species
+#' @param Mb Mass branches (unitless, usually in Mg ha$^{-1}$)
+#' @inheritParams foliage.litter
 #' @return
 #' @examples
 branch.litter <- function(Mb, spec) {
@@ -56,8 +56,8 @@ branch.litter <- function(Mb, spec) {
 # the bark of the stump
 #' Calculates stump bark litter
 #'
-#' @param Mst
-#' @param spec tree species
+#' @param Mst Mass stumps (unitless, usually in Mg ha$^{-1}$)
+#' @inheritParams foliage.litter
 #' @return
 #' @examples
 stump.litter <- function(Mst, spec) {
@@ -71,8 +71,8 @@ stump.litter <- function(Mst, spec) {
 
 #' Calculates root litter
 #'
-#' @param Mr
-#' @param spec tree species
+#' @param Mr Mass roots (unitless, usually in Mg ha$^{-1}$)
+#' @inheritParams foliage.litter
 #' @return
 #' @examples
 root.litter <- function(Mr, spec) {
@@ -86,8 +86,8 @@ root.litter <- function(Mr, spec) {
 
 #' Calculates bark litter
 #'
-#' @param Ms
-#' @param spec tree species
+#' @param Ms Mass bark (unitless, usually in Mg ha$^{-1}$)
+#' @inheritParams foliage.litter
 #' @return
 #' @examples
 bark.litter <- function(Ms, spec) {
@@ -102,21 +102,17 @@ bark.litter <- function(Ms, spec) {
 
 
 
-# fineroot.litter <- function(Mf) {
-#   return(Mf*0.85)
-# }
-
 #' Calculates fine root litter
 #'
-#' @param Mf
-#' @param spec tree species
+#' @param Mfr
+#' @inheritParams foliage.litter
 #' @return
 #' @examples
-fineroot.litter.reg <- function(Mf,reg) {
+fineroot.litter.reg <- function(Mfr,reg) {
   if (reg==1) {
-          return(Mf*0.85)}
+          return(Mfr*0.85)}
   if (reg==2) {
-          return(Mf*0.5)}
+          return(Mfr*0.5)}
 }
 #
 # Based on assumptions
@@ -124,7 +120,7 @@ fineroot.litter.reg <- function(Mf,reg) {
 
 #' Calculates fine root litter with three different options based on tsum
 #'
-#' @param Mf
+#' @param Mfr
 #' @param tsum temperature sum
 #' @return
 #' @examples
@@ -143,8 +139,8 @@ fineroot.litter.tsum <- function(Mfr, tsum) {
 #########################
 #' Converts biomass in carbon
 #'
-#' @param M
-#' @return
+#' @param M mass of organic matter
+#' @return a scalar, mass of C
 #' @examples
 carbon <- function(M) {
   return(M*0.5)
@@ -227,7 +223,7 @@ fr.AWEN[,4][ko] <- 0.2951*Lfr[ko]
 
 
 ## Branches are here
-# It seems that there is only valiues for pine (these are applied for others as well)
+# It seems that there is only values for pine (these are applied for others as well)
 #' Calculates the AWEN proportions of branches biomass
 #'
 #' @param Lb branches biomass

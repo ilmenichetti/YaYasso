@@ -4,10 +4,7 @@
 \alias{fineroot.litter.reg}
 \title{Calculates fine root litter}
 \usage{
-fineroot.litter.reg(Mf, reg)
-}
-\arguments{
-\item{spec}{tree species}
+fineroot.litter.reg(Mfr, reg)
 }
 \description{
 Calculates fine root litter

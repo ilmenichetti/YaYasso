@@ -7,7 +7,9 @@
 root.litter(Mr, spec)
 }
 \arguments{
-\item{spec}{tree species}
+\item{Mr}{Mass roots (unitless, usually in Mg ha$^{-1}$)}
+
+\item{spec}{tree species, 1=pine 2=spruce, 3=residues (broadleaves)}
 }
 \description{
 Calculates root litter

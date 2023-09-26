@@ -7,7 +7,9 @@
 branch.litter(Mb, spec)
 }
 \arguments{
-\item{spec}{tree species}
+\item{Mb}{Mass branches (unitless, usually in Mg ha$^{-1}$)}
+
+\item{spec}{tree species, 1=pine 2=spruce, 3=residues (broadleaves)}
 }
 \description{
 Calculates branch litter

@@ -7,7 +7,9 @@
 stump.litter(Mst, spec)
 }
 \arguments{
-\item{spec}{tree species}
+\item{Mst}{Mass stumps (unitless, usually in Mg ha$^{-1}$)}
+
+\item{spec}{tree species, 1=pine 2=spruce, 3=residues (broadleaves)}
 }
 \description{
 Calculates stump bark litter

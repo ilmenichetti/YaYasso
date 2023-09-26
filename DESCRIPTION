@@ -1,10 +1,10 @@
 Package: YaYasso
 Type: Package
-Title: The package combines the decomposition model Yasso20 with a set of statistical forest growth functions to simulate the C stocks of a commercial stand
-Version: 0.1.0
+Title: The package is a collection of function to combine with the decomposition model Yasso20 to simulate the C stocks of a commercial stand. The Yasso model is loaded from its repository, and not contained in the package, in order to keep it up to dat
+Version: 0.1.0e.
 Author: Lorenzo Menichetti, Boris Tupek, Aleksi Lehtonen
 Maintainer: Lorenzo Menichetti <ilmenichetti@gmail.comt>
-Description: More about what it does (maybe more than one line)
+Description: IMPORTANT: The package relies on the Ryassofortran package, which must be installed from its development GitHub with: install.packages("devtools"), devtools::install_github("YASSOmodel/Ryassofortran")
     Use four spaces when indenting paragraphs within the Description.
 License: CC BY 4.0
 Encoding: UTF-8

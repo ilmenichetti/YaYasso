@@ -10,15 +10,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Tree species
-To which species 1, 2, and 3 correspond?
+To which species 1, 2, and 3 correspond? ANSWERED
 
 #function foliage.litter
-* what is Mf? Is some sort of mass (t/ha)? Mass of foliage from the allometries?
+* what is Mf? Is some sort of mass (t/ha)? Mass of foliage from the allometries? ANSWERED
 * to which region correspond the "reg" parameter?
 * what is the "min" parameter?
 
+#function bark.litter
+What does this calulcate?
+
+
 # functions branch.litter, stump.litter, root.litter, bark litter
-Again what is the mass parameter (is that mass)?
+Again what is the mass parameter (is that mass)? ANSWERED
 
 # function fineroot.litter.tsum
 How does the tsom work? I mean, is that cumulative monthly in celsius degrees, right?

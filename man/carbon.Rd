@@ -6,6 +6,12 @@
 \usage{
 carbon(M)
 }
+\arguments{
+\item{M}{mass of organic matter}
+}
+\value{
+a scalar, mass of C
+}
 \description{
 Converts biomass in carbon
 }
