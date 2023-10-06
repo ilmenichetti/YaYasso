@@ -14,3 +14,9 @@ fineroot.AWEN(Lfr, spec)
 \description{
 Calculates the AWEN proportins of fine roots biomass
 }
+\references{
+Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - Finnish Environment Institute, Helsinki, 2009
+}
+\seealso{
+\link{fineroot.litter.reg} \link{fineroot.litter.tsum}
+}

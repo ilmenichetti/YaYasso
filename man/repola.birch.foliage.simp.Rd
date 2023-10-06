@@ -10,7 +10,7 @@ repola.birch.foliage.simp(d13rm)
 \item{d13rm}{tree diameter at breast heigh, cm (the function converts it to dk=2+1.25*d13rm)}
 }
 \value{
-The biomass component defined by the function, kg
+The biomass component defined by the function (kg)
 }
 \description{
 Repola function for birch, leaves  model 1

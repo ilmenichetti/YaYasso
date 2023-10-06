@@ -12,7 +12,7 @@ stem.vol.spruce(d13rm, ht)
 \item{ht}{tree height, m}
 }
 \value{
-the volme of stem (m$^3$)
+the volme of stem (\eqn{m^3})
 }
 \description{
 Function for calculating the stem volume, spruce

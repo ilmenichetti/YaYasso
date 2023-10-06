@@ -4,14 +4,14 @@
 \alias{carbon}
 \title{Converts biomass in carbon}
 \usage{
-carbon(M)
+carbon(mass)
 }
 \arguments{
-\item{M}{mass of organic matter}
+\item{mass}{mass of organic matter}
 }
 \value{
 a scalar, mass of C
 }
 \description{
-Converts biomass in carbon
+The function assumes 50\% C content of organic matter
 }

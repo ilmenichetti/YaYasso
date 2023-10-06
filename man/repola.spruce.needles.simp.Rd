@@ -12,7 +12,7 @@ repola.spruce.needles.simp(d13rm, ht)
 \item{ht}{tree height, m}
 }
 \value{
-The biomass component defined by the function, kg
+The biomass component defined by the function (kg)
 }
 \description{
 Repola function for spruce, needles  model 1ß

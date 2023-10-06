@@ -12,3 +12,6 @@ branches.AWEN(Lb)
 \description{
 Calculates the AWEN proportions of branches biomass
 }
+\seealso{
+\link{branches.litter}
+}

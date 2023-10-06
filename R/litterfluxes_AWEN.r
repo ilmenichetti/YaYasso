@@ -19,6 +19,7 @@
 #' @param min
 #' @return
 #' @examples
+#' @seealso \link{foliage.AWEN}
 foliage.litter <- function(Mf, spec, reg, min) {
   if (spec==1 & reg==1 & min==1) {
     return(Mf*0.278)}
@@ -43,7 +44,7 @@ foliage.litter <- function(Mf, spec, reg, min) {
 #' @inheritParams foliage.litter
 #' @return
 #' @examples
-branch.litter <- function(Mb, spec) {
+branches.litter <- function(Mb, spec) {
   if (spec==1) {
           return(Mb*0.02)}
   if (spec==2) {
@@ -123,15 +124,14 @@ fineroot.litter.reg <- function(Mfr,reg) {
 #' @param Mfr
 #' @param tsum temperature sum
 #' @return
-#' @examples
+#' @references
 fineroot.litter.tsum <- function(Mfr, tsum) {
   if (tsum>=1200) {
           return(Mfr*0.85)}
   if (tsum<=700) {
           return(Mfr*0.5)}
   if (tsum<1200 && tsum>700){
-    return(Mfr*(0.0007*tsum+0.001))
-}
+    return(Mfr*(0.0007*tsum+0.001))}
 }
 
 
@@ -139,11 +139,14 @@ fineroot.litter.tsum <- function(Mfr, tsum) {
 #########################
 #' Converts biomass in carbon
 #'
-#' @param M mass of organic matter
-#' @return a scalar, mass of C
+#' @description
+#' The function assumes 50\% C content of organic matter
+#'
+#' @param mass mass of organic matter
+#' @returns a scalar, mass of C
 #' @examples
-carbon <- function(M) {
-  return(M*0.5)
+carbon <- function(mass) {
+  return(mass*0.5)
 }
 
 
@@ -160,8 +163,10 @@ carbon <- function(M) {
 #'
 #' @param Lf leaves biomass
 #' @param spec tree species
-#' @return
+#' @returns the mass of the four AWEN components
 #' @examples
+#' @references Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
+#' @seealso \link{foliage.litter}
 foliage.AWEN <- function(Lf, spec) {
 
   fol.AWEN <- matrix(0,nrow=length(Lf), ncol=4)
@@ -193,8 +198,9 @@ fol.AWEN[,4][ko] <- 0.2951*Lf[ko]
 #'
 #' @param Lfr fine roots biomass
 #' @param spec tree species
-#' @return
 #' @examples
+#' @inherit foliage.AWEN
+#' @seealso \link{fineroot.litter.reg} \link{fineroot.litter.tsum}
 fineroot.AWEN <- function(Lfr, spec) {
 
   fr.AWEN <- matrix(0,nrow=length(Lfr), ncol=4)
@@ -227,8 +233,9 @@ fr.AWEN[,4][ko] <- 0.2951*Lfr[ko]
 #' Calculates the AWEN proportions of branches biomass
 #'
 #' @param Lb branches biomass
-#' @return
 #' @examples
+#' @inherit foliage.AWEN
+#' @seealso \link{branches.litter}
 branches.AWEN <- function(Lb) {
    fb.AWEN <- matrix(0,nrow=length(Lb), ncol=4)
 
@@ -250,7 +257,6 @@ fb.AWEN[,3] <- mean(e)*Lb
 fb.AWEN[,4] <- mean(n)*Lb
 
 return(fb.AWEN)
-
  }
 
 #' Calculates the AWEN proportions of stems biomass
@@ -259,6 +265,7 @@ return(fb.AWEN)
 #' @param spec tree species tree species
 #' @return
 #' @examples
+#' @inherit foliage.AWEN
 stem.AWEN <- function(Lst, spec) {
 
   st.AWEN <- matrix(0,nrow=length(Lst), ncol=4)
@@ -289,9 +296,10 @@ st.AWEN[,4][ko] <- 0.5*(0.32+0.22)*Lst[ko]
 #'
 #' @param Lg grass biomass
 #' @param above
-#' @return
 #' @examples
-grass.AWEN <- function(Lg, above) {
+#' @inherit foliage.AWEN
+#' @seealso \link{understorey.grass.litter}
+understorey.grass.AWEN <- function(Lg, above) {
  grass.AWEN <- matrix(0,nrow=length(Lg), ncol=4)
   a <- (1:length(Lg))[above==1]
   b <- (1:length(Lg))[above==0]
@@ -310,12 +318,11 @@ grass.AWEN[,4][b] <- 0.025*Lg[b]
 }
 
 
-
 #' Calculates the AWEN proportions of twig biomass
 #'
 #' @param Lt
-#' @return
 #' @examples
+#' @inherit foliage.AWEN
 twig.AWEN <- function(Lt) {
  twig.AWEN <- matrix(0,nrow=length(Lt), ncol=4)
 
@@ -329,10 +336,11 @@ twig.AWEN[,4] <- 0.131*Lt
 ### Note this is lichen (jäkälä)
 #' Calculates the AWEN proportions of lichens biomass
 #'
-#' @param Ll grass biomass
-#' @return
+#' @param Ll lichens biomass
 #' @examples
-lichen.AWEN <- function(Ll) {
+#' @inherit foliage.AWEN
+#' @seealso \link{understorey.lichen.litter}
+understorey.lichen.AWEN <- function(Ll) {
  lichen.AWEN <- matrix(0,nrow=length(Ll), ncol=4)
 
 lichen.AWEN[,1] <- 0.836*Ll
@@ -343,12 +351,13 @@ return(lichen.AWEN)
 }
 
 ### Note this is moss (sammal)
-#' Calculates the AWEN proportions of mosses biomass
+#' Calculates the AWEN proportions of bryophytes (was: mosses) biomass
 #'
-#' @param Lm grass biomass
-#' @return
+#' @param Lm moss biomass
 #' @examples
-moss.AWEN <- function(Lm) {
+#' @inherit foliage.AWEN
+#' @seealso \link{understorey.bryoph.litter}
+understorey.bryoph.AWEN <- function(Lm) {
  moss.AWEN <- matrix(0,nrow=length(Lm), ncol=4)
 
 moss.AWEN[,1] <- 0.736*Lm
@@ -361,8 +370,8 @@ return(moss.AWEN)
 #' Calculates the AWEN proportions of wheat biomass
 #'
 #' @param Lwheat wheat biomass
-#' @return
 #' @examples
+#' @inherit foliage.AWEN
 wheat.AWEN <- function(Lwheat) {
   wh.AWEN <- matrix(0,nrow=length(Lwheat), ncol=4)
 
@@ -377,8 +386,8 @@ wh.AWEN[,4] <- 0.131759*Lwheat
 #' Calculates the AWEN proportions of barley biomass
 #'
 #' @param Lbarley barley biomass
-#' @return
 #' @examples
+#' @inherit foliage.AWEN
 barley.AWEN <- function(Lbarley) {
   bar.AWEN <- matrix(0,nrow=length(Lbarley), ncol=4)
 
@@ -393,8 +402,8 @@ bar.AWEN[,4] <- 0.075972*Lbarley
 #' Calculates the AWEN proportions of cow dung biomass
 #'
 #' @param Lshit cow dung biomass
-#' @return
 #' @examples
+#' @inherit foliage.AWEN
 shit.AWEN <- function(Lshit) {
   shi.AWEN <- matrix(0,nrow=length(Lshit), ncol=4)
 
@@ -413,10 +422,11 @@ shi.AWEN[,4] <- 0.129199*Lshit
 #' Calculates the biomass of the understorey dwarf shrubs
 #'
 #' @param mass
-#' @param comp
+#' @param comp compartment, abv = above, bel = below ????
 #' @return
 #' @examples
-dwarfshrub.litter <- function(mass, comp) {
+#' @seealso \link{understorey.dwarfshrub}
+understorey.dwarfshrub.litter <- function(mass, comp) {
      if (comp=='abv'){
     return(0.37*mass) }
      if (comp=='bel'){
@@ -440,7 +450,8 @@ dwarfshrub.litter <- function(mass, comp) {
 #' @param mass
 #' @return
 #' @examples
-bryof.litter <- function(mass) {
+#' @seealso \link{understorey.bryoph}
+understorey.bryoph.litter <- function(mass) {
     return(0.417*mass)
 }
 
@@ -449,7 +460,8 @@ bryof.litter <- function(mass) {
 #' @param mass
 #' @return
 #' @examples
-lichen.litter <- function(mass) {
+#' @seealso \link{understorey.lichen}
+understorey.lichen.litter <- function(mass) {
     return(0.1*mass)
 }
 
@@ -458,7 +470,8 @@ lichen.litter <- function(mass) {
 #' @param mass
 #' @return
 #' @examples
-grass.litter <- function(mass,comp) {
+#' @seealso \link{understorey.grass}
+understorey.grass.litter <- function(mass,comp) {
      if (comp=='abv'){
     return(0.33*mass) }
      if (comp=='bel'){
@@ -470,7 +483,8 @@ grass.litter <- function(mass,comp) {
 #' @param mass
 #' @return
 #' @examples
-herb.litter <- function(mass,comp){
+#' @seealso \link{understorey.herb}
+understorey.herb.litter <- function(mass,comp){
      if (comp=='abv'){
     return(1*mass) }
      if (comp=='bel'){

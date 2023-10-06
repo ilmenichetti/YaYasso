@@ -14,7 +14,7 @@
 #' Function for calculating the stem volume, pine
 #' @param d13rm tree diameter at breast heigh, cm
 #' @param ht  tree height, m
-#' @return the volme of stem (m$^3$)
+#' @return the volme of stem (\eqn{m^3})
 #' @references Laasasenaho, J. Taper curve and volume functions for pine, spruce and birch. at (1982).
 stem.vol.pine <- function(d13rm, ht) {                                 #[dm3 =l]
   b0 <- 0.036089
@@ -89,11 +89,20 @@ stem.vol.birch.comp <- function(d13rm, ht, d6) {            #[dm3 =l]
 
 
 ## stem wood density [kg*m-3] on tree level      ================= FUNCTIONS
-repola.pine.dens <- function(d13rm,t13,lamsum) {                          # Pine
+#' Repola function for wood density, pine
+#' @param d13rm tree diameter at breast heigh, (cm). The function converts it to dk=2+1.25*d13rm.
+#' @param t13 tree age at breast height (years)
+#' @param tsum average annual effective temperature sum (>5 °C)
+#' @return bulk density of wood (dimensionless, ratio)
+#' @references  Repola, J. & Kukkola, R. O. and M. Biomass functions for Scots pine, Norway spruce and birch in Finland. Working Papers of the Finnish Forest Research Institute (2007).
+repola.pine.dens <- function(d13rm,t13,tsum) {                          # Pine
   b0 <- 378.39
   b1 <- -78.829
   b2 <- 0.039
-  return(b0 + b1*d13rm/t13 + b2*lamsum) }
+  return(b0 + b1*d13rm/t13 + b2*tsum) }
+
+#' Repola function for wood density, spruce
+#' @inherit repola.pine.dens
 repola.spruce.dens <- function(d13rm,t13) {                             # Spruce
   b0 <- 442.03
   b1 <- -0.904
@@ -101,6 +110,9 @@ repola.spruce.dens <- function(d13rm,t13) {                             # Spruce
   dk <- 2+1.25*d13rm
   return(b0 + b1*dk + b2*d13rm/t13)
 }
+
+#' Repola function for wood density, spruce
+#' @inherit repola.pine.dens
 repola.birch.dens <- function(d13rm,t13) {                               # Birch
   b0 <- 431.43
   b1 <- 28.054
@@ -115,7 +127,7 @@ repola.birch.dens <- function(d13rm,t13) {                               # Birch
 #' Repola function for pine, stem wood, model 1
 #' @param d13rm tree diameter at breast heigh, cm (the function converts it to dk=2+1.25*d13rm)
 #' @param ht  tree height, m
-#' @return The biomass component defined by the function, kg
+#' @return The biomass component defined by the function (kg)
 #' @references  Repola, J. Biomass equations for birch in Finland. Silva Fenn. 42, (2008) and Repola, J. Biomass equations for Scots pine and Norway spruce in Finland. Silva Fenn. 43, (2009).
 repola.pine.stem.simp <- function(d13rm, ht) {
   ma.ru.m1 = function(dk, ht) exp(-3.721+8.103*dk/(dk+14)+5.066*ht/(ht+12)+(0.002+0.009)/2)  #Model 1
@@ -171,7 +183,7 @@ repola.birch.stembark.simp <- function(d13rm, ht) {
 ##  weight of foliage [kg] on tree level    ======================= FUNCTIONS
 #' Repola function for pine, needles  model 2
 #' @inherit repola.pine.stem.simp
-#' @param hlc  ?????????????
+#' @param hlc  Height of living crown (m)
 repola.pine.needles <- function(d13rm, ht, hlc) {
   cl <- ht- hlc
   dk <- 2+1.25*d13rm
@@ -412,10 +424,10 @@ petersson.birch.below <-  function(d13rm) {
 ##  weight of fine roots [kg] on tree level    ======================= FUNCTIONS
 
 #' Fine root based on root mass
-#' @param Mf mass of roots
+#' @param Mf mass of roots (any mass unit)
 #' @param spec tree species, 1 = Pine, 2 = Spruce, 3 = Birch
-#' @references Helmisaari, H.-S., Derome, J., Nöjd, P. & Kukkola, M. Fine root biomass in relation to site and stand characteristics in Norway spruce and Scots pine stands. Tree Physiol. 27, 1493–1504 (2007).
-fineroots <- function(Mf,spec) {
+#' @references ?????????? not sure at all!!!  Helmisaari, H.-S., Derome, J., Nöjd, P. & Kukkola, M. Fine root biomass in relation to site and stand characteristics in Norway spruce and Scots pine stands. Tree Physiol. 27, 1493–1504 (2007).
+fineroot.linear <- function(Mf,spec) {
   if (spec==1) {
     return(Mf*0.676)}
   if (spec==2) {
@@ -424,10 +436,10 @@ fineroots <- function(Mf,spec) {
     return(Mf*0.5)}
 }
 
-#' Fine root based on root mass and type
-#' @inherit fineroots
+#' Fine root based on root mass and fertility
+#' @inherit fineroot.linear
 #' @param type Forest type, it is a proxy for soil fertility. 3 = Myrtillus, 4 = Vaccinium, 5 = Calluna
-finerootsbytype <- function(Mf,spec,type) {
+fineroot.linear.fertility <- function(Mf,spec,type) {
   if (spec==1 & type<3) {
     return(Mf*0.2)}
   if (spec==2 & type<3) {
@@ -457,6 +469,17 @@ finerootsbytype <- function(Mf,spec,type) {
     return(Mf*2.5)}
 }
 
+
+# includes all fineroots, also understorey # tsum from 1961 - 1990 # Helmisaari et al. 2007 # tonnia biomassaa
+#' Fine root of the whole stand (including understorey), based on tsum
+#' @inherit fineroot.linear
+#' @inheritParams repola.pine.dens
+fineroot.total.tsum <- function(tsum) {
+  return((-0.396*tsum+771.4)/100)
+}
+
+
+
 #Lethtonen et al. 2015 FORECO
 #fine.root model? email from Aleksi 27.2.2015 Subject: fineroot model
 #> summary(f3)
@@ -482,29 +505,42 @@ finerootsbytype <- function(Mf,spec,type) {
 #Multiple R-squared:  0.467,  Adjusted R-squared:  0.449
 #F-statistic: 25.99 on 3 and 89 DF,  p-value: 3.64e-12
 
-fineroots <- function(basal,decid,cno) {
-  return(exp(3.10397 +0.73447*log(basal) + 0.66066*decid + 0.72086*log(cno) + (0.4488^2)/2))
+
+
+
+#' Fine root biomass function (basal area)
+#' @description
+#' Part of a series of functions predicting the fine root biomass of a stand
+#'
+#' @param basal stand basal area (\eqn{m^2 ha^{-1}})
+#' @param decid dominance of birch, factor (0= dominance of conifer, 1 = dominance of birch????)
+#' @param CNo carbon:nitrogen ratio of organic layer or upper 0–20 cm peat layer
+#' @return fine root biomass (<2mm) in g
+#' @references Lehtonen, A. et al. Modelling fine root biomass of boreal tree stands using site and stand variables. For. Ecol. Manag. 359, 361–369 (2016).
+fineroot.stand <- function(basal,decid,CNo) {
+  return(exp(3.10397 +0.73447*log(basal) + 0.66066*decid + 0.72086*log(CNo) + (0.4488^2)/2))
 }
 
 
 # fineroote model based on stem volume updated 27.2.2015
+#' Fine root biomass function (volume)
+#' @description
+#' Part of a series of functions predicting the fine root biomass of a stand
+#'
+#' @param vol stand volume (\eqn{m^3 ha^{-1}})
+#' @return fine root biomass (<2mm) in g
+#' @references Lehtonen, A. et al. Modelling fine root biomass of boreal tree stands using site and stand variables. For. Ecol. Manag. 359, 361–369 (2016).
 
-finerootsfromvolume <- function(vol) {
+fineroot.stand.volume <- function(vol) {
   return(exp(6.203+0.320*log(vol)+(0.530^2)/2))
 }
 
-finerootsfromvolume.OLD <- function(vol) {
+fineroot.stand.volume.OLD <- function(vol) {
   return(exp(6.44043+0.27071*log(vol)+(0.542^2)/2))
 
 }
-
-
 ### above coding is from Sanna Harkonen biomassa.r
 
-# includes all fineroots, also understorey # tsum from 1961 - 1990 # Helmisaari et al. 2007 # tonnia biomassaa
-fineroot.biomass.tsum <- function(tsum) {
-return((-0.396*tsum+771.4)/100)
-}
 
 
 
@@ -629,7 +665,7 @@ understorey.bryoph.OLD <- function(cov, reg) {
 
 #' Understorey vegetation functions, developed by Lehtonen based on data from Salemaa, M., et. al 2013
 #' @inheritParams understorey.dwarfshrub
-lich <- function(cov, reg) {
+understorey.lichen <- function(cov, reg) {
   if (reg==1){
     return(exp(3.69+0.894*log(cov+1)+0.109))
   }
@@ -640,6 +676,6 @@ lich <- function(cov, reg) {
 
 #' Understorey vegetation functions, developed by Lehtonen based on data from Salemaa, M., et. al 2013
 #' @inherit understorey.dwarfshrub.OLD
-understorey.lich.OLD <- function(cov) {
+understorey.lichen.OLD <- function(cov) {
   return(60.087*cov^0.7015)}
 

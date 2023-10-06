@@ -9,32 +9,6 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Tree species
-To which species 1, 2, and 3 correspond? ANSWERED
+# Missing litter function for stems
 
-#function foliage.litter
-* what is Mf? Is some sort of mass (t/ha)? Mass of foliage from the allometries? ANSWERED
-* to which region correspond the "reg" parameter?
-* what is the "min" parameter?
-
-#function bark.litter
-What does this calulcate?
-
-
-# functions branch.litter, stump.litter, root.litter, bark litter
-Again what is the mass parameter (is that mass)? ANSWERED
-
-# function fineroot.litter.tsum
-How does the tsom work? I mean, is that cumulative monthly in celsius degrees, right?
-
-# function shit.AWEN
-which kind of shit the shit.AWEN function works on? Is it cow?
-
-# function dwarfshrub.litter
-what is "mass"? Mass of what? What are the options "abs" and "bel"?
-
-# functions bryof.litter, lychen.litter, grass.litter, herb.litter
-as above, what is "mass"?
-
-# functions grass.litter and herb.litter
-what are the definitions of herb and grass?
+# Missing litter function for twig

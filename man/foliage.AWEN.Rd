@@ -14,3 +14,9 @@ foliage.AWEN(Lf, spec)
 \description{
 Calculates the AWEN proportins of foliage biomass
 }
+\references{
+Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - Finnish Environment Institute, Helsinki, 2009
+}
+\seealso{
+\link{foliage.litter}
+}

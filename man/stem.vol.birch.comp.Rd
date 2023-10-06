@@ -14,7 +14,7 @@ stem.vol.birch.comp(d13rm, ht, d6)
 \item{d6}{diameter at 6 m height (cm)}
 }
 \value{
-the volme of stem (m$^3$)
+the volme of stem (\eqn{m^3})
 }
 \description{
 Function for calculating the stem volume, birch

@@ -11,10 +11,10 @@ repola.birch.livbranch(d13rm, ht, hlc)
 
 \item{ht}{tree height, m}
 
-\item{hlc}{?????????????}
+\item{hlc}{Height of living crown (m)}
 }
 \value{
-The biomass component defined by the function, kg
+The biomass component defined by the function (kg)
 }
 \description{
 Repola function for birch, living branches,  model 2

@@ -14,3 +14,6 @@ foliage.litter(Mf, spec, reg, min)
 \description{
 Calculates foliage litter
 }
+\seealso{
+\link{foliage.AWEN}
+}
