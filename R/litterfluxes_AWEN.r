@@ -536,7 +536,7 @@ understorey.herb.litter <- function(mass,comp){
 understorey.biomass <- function(p_lich, p_bryoph, p_shrubs, p_grasses, spec){
 
   eq1=function(p, b_0, b_1) {p^2/(b_0+b_1*p)^2}
-  eq2=function(p, b_0) {b_1*p}
+  eq2=function(p, b_0) {b_0*p}
 
       #pine forest (and birch, since it is missing)
       if(spec==1 | spec==3){
