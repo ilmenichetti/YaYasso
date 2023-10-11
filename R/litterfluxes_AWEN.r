@@ -521,3 +521,49 @@ understorey.herb.litter <- function(mass,comp){
      if (comp=='bel'){
     return((1/1.7)*mass) }
  }
+
+
+
+#' Calculates the biomass of the understorey based on % cover, uplands soils
+#'
+#' @param p_lich
+#' @param p_bryoph
+#' @param p_shrubs
+#' @param p_grasses
+#' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves). For boradleaves the functions are missing, it relies on the same functions than in pine forests
+#' @return
+#' @references Muukkonen, P. et al. Relationship between biomass and percentage cover in understorey vegetation of boreal coniferous forests. Silva Fenn. 40, (2006).
+understorey.biomass <- function(p_lich, p_bryoph, p_shrubs, p_grasses){
+
+  eq1=function(p, b_0, b_1) {p^2/(b_0+b_1*p)^2}
+  eq2=function(p, b_0) {b_1*p}
+
+      #pine forest (and birch, since it is missing)
+      if(spec==1 | spec==3){
+        #bryophytes
+        b_bri=eq1(p_lich, b_0=1.1833, b_1=0.0334)
+        #lychens
+        b_lich=eq1(p_bryoph, b_0=4.3369, b_1=0.0128)
+
+        #shrubs
+        b_shrubs=eq2(p_shrubs, b_0=2.1262)
+        #grasses and herbs
+        b_grass=eq2(p_grasses, b_0=0.8416)
+      } else if (spec==2){
+      #spruce fores
+        #bryophytes
+        b_bri=eq1(p_lich, b_0=1.8304, b_1=0.0482)
+        #lychens
+        b_lich=eq1(p_bryoph, b_0=4.3369, b_1=0.0128) #unchanged from pines since it is missing in the paper
+
+        #shrubs
+        b_shrubs=eq2(p_shrubs, b_0=1.3169)
+        #grasses and herbs
+        b_grass=eq2(p_grasses, b_0=0.6552)
+      }
+
+
+return(c(b_bri, b_lich, b_shrubs, b_grass))
+}
+
+
