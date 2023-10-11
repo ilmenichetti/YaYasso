@@ -13,7 +13,7 @@ foliage.litter(Mf, spec, reg, min)
 
 \item{reg}{Region (1= Northern Finland or 2= Southern Finland)}
 
-\item{min}{(0 or 1) ????}
+\item{min}{mineral soil, TRUE/FALSE}
 }
 \description{
 Calculates foliage litter

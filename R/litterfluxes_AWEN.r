@@ -16,17 +16,17 @@
 #' @param Mf mass of living foliage (unitless, usually in Mg ha$^{-1}$)
 #' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves)
 #' @param reg Region (1= Northern Finland or 2= Southern Finland)
-#' @param min (0 or 1) ????
+#' @param min mineral soil, TRUE/FALSE
 #' @references Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).
 #' @return
 #' @examples
 #' @seealso \link{foliage.AWEN}
 foliage.litter <- function(Mf, spec, reg, min) {
-  if (spec==1 & reg==1 & min==1) {
+  if (spec==1 & reg==1 & min==T) {
     return(Mf*0.278)}
-  if (spec==1 & reg==2 & min==1) {
+  if (spec==1 & reg==2 & min==T) {
     return(Mf*0.213) }
-  if (spec==1 & min==0) {
+  if (spec==1 & min==F) {
     return(Mf*0.33) }
 
   if (spec==2) {
