@@ -533,7 +533,7 @@ understorey.herb.litter <- function(mass,comp){
 #' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves). For boradleaves the functions are missing, it relies on the same functions than in pine forests
 #' @return
 #' @references Muukkonen, P. et al. Relationship between biomass and percentage cover in understorey vegetation of boreal coniferous forests. Silva Fenn. 40, (2006).
-understorey.biomass <- function(p_lich, p_bryoph, p_shrubs, p_grasses){
+understorey.biomass <- function(p_lich, p_bryoph, p_shrubs, p_grasses, spec){
 
   eq1=function(p, b_0, b_1) {p^2/(b_0+b_1*p)^2}
   eq2=function(p, b_0) {b_1*p}
