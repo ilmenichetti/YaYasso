@@ -13,10 +13,11 @@
 
 #' Calculates foliage litter
 #'
-#' @param Mf mass of foliage (unitless, usually in Mg ha$^{-1}$)
+#' @param Mf mass of living foliage (unitless, usually in Mg ha$^{-1}$)
 #' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves)
-#' @param reg
-#' @param min
+#' @param reg Region (1= Northern Finland or 2= Southern Finland)
+#' @param min (0 or 1) ????
+#' @references Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).
 #' @return
 #' @examples
 #' @seealso \link{foliage.AWEN}
@@ -38,9 +39,38 @@ foliage.litter <- function(Mf, spec, reg, min) {
            return(Mf*0.79)}
 }
 
+#' Calculates foliage litter based on the older approach, with one less option (min)
+#'
+#' @param Mf mass of living foliage (unitless, usually in Mg ha$^{-1}$)
+#' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves)
+#' @param reg Region (1= Northern Finland or 2= Southern Finland)
+#' @references Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).
+#' @return
+#' @examples
+#' @seealso \link{foliage.AWEN}
+foliage.litter.Liski2006 <- function(Mf, spec, reg, min) {
+  if (spec==1) {
+    if (reg==1) {
+      return(Mf*0.22)}
+    if (reg==2) {
+      return(Mf*0.1)}
+  }
+
+  if (spec==2) {
+    if (reg==1) {
+      return(Mf*0.1)}
+    if (reg==2) {
+      return(Mf*0.05)}
+  }
+  if (spec==3) {
+    return(Mf*0.70)}
+}
+
+
+
 #' Calculates branch litter
 #'
-#' @param Mb Mass branches (unitless, usually in Mg ha$^{-1}$)
+#' @param Mb Mass living branches (unitless, usually in Mg ha$^{-1}$)
 #' @inheritParams foliage.litter
 #' @return
 #' @examples
@@ -72,7 +102,7 @@ stump.litter <- function(Mst, spec) {
 
 #' Calculates root litter
 #'
-#' @param Mr Mass roots (unitless, usually in Mg ha$^{-1}$)
+#' @param Mr Mass living roots (unitless, usually in Mg ha$^{-1}$)
 #' @inheritParams foliage.litter
 #' @return
 #' @examples
@@ -318,8 +348,9 @@ grass.AWEN[,4][b] <- 0.025*Lg[b]
 }
 
 
-#' Calculates the AWEN proportions of twig biomass
+#' Calculates the AWEN proportions of twig biomass.
 #'
+#' @description DEPRECATED, please use \link{foliage.AWEN}
 #' @param Lt
 #' @examples
 #' @inherit foliage.AWEN
