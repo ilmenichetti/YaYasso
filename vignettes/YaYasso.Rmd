@@ -46,14 +46,14 @@ yassofix <- Yasso07Modelfi(years,
                            C0=rep(0,5), #initial carbon
                            AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
                            In=Litter,#litter C input (same length as years)
-                           xi = 0, # only xi = 1  will replace climate data no climate effect,
+                           xi = T, # xi = F  will replace climate data no climate effect,
                            MT=MT,#MeanTemperature
                            TA=TA, #TemperatureAmplitude
                            PR_mm=PR_mm,#Precipitation_mm)
                            WS=2)
-Ct=getC(yassofix)
 
-Rt=getReleaseFlux(yassofix) #respiration
+Ct = getC(yassofix)
+Rt = getReleaseFlux(yassofix) #respiration
 
 ```
 ```{r}
