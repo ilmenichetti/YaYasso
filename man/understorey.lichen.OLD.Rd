@@ -7,7 +7,7 @@
 understorey.lichen.OLD(cov)
 }
 \arguments{
-\item{cov}{coverage ????}
+\item{cov}{coverage, %}
 }
 \description{
 Understorey vegetation functions, developed by Lehtonen based on data from Salemaa, M., et. al 2013

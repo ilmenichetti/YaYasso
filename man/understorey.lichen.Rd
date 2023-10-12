@@ -4,12 +4,10 @@
 \alias{understorey.lichen}
 \title{Understorey vegetation functions, developed by Lehtonen based on data from Salemaa, M., et. al 2013}
 \usage{
-understorey.lichen(cov, reg)
+understorey.lichen(cov)
 }
 \arguments{
-\item{cov}{coverage ????}
-
-\item{reg}{region (1 = south 2 = north Finland ????)}
+\item{cov}{coverage, %}
 }
 \description{
 Understorey vegetation functions, developed by Lehtonen based on data from Salemaa, M., et. al 2013

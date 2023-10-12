@@ -7,7 +7,7 @@
 understorey.herb(cov, comp, reg)
 }
 \arguments{
-\item{cov}{coverage ????}
+\item{cov}{coverage, %}
 
 \item{comp}{compartment, abv = above, bel = below ????}
 

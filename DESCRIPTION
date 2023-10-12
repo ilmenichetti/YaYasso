@@ -1,6 +1,6 @@
 Package: YaYasso
 Type: Package
-Title: The package is a collection of function to combine with the decomposition model Yasso20 to simulate the C stocks of a commercial stand. The Yasso model is loaded from its repository, and not contained in the package, in order to keep it up to dat
+Title: The package (Yet another Yasso) is a collection of function to combine with the decomposition model Yasso to simulate the C stocks of a commercial stand.
 Version: 0.1.0
 Author: Lorenzo Menichetti, Boris Tupek, Aleksi Lehtonen
 Maintainer: Lorenzo Menichetti <ilmenichetti@gmail.comt>
@@ -10,3 +10,10 @@ License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+Depends:
+    SoilR,
+    deSolve
+VignetteBuilder: knitr
