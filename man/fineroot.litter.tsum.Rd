@@ -7,6 +7,8 @@
 fineroot.litter.tsum(Mfr, tsum)
 }
 \arguments{
+\item{Mfr}{mass of fine roots???}
+
 \item{tsum}{temperature sum}
 }
 \description{

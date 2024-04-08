@@ -2,7 +2,7 @@
 % Please edit documentation in R/litterfluxes_AWEN.r
 \name{foliage.litter.Liski2006}
 \alias{foliage.litter.Liski2006}
-\title{Calculates foliage litter based on the older approach, with one less option (min)}
+\title{Calculates foliage litter based on the older approach, with one less option (min). Deprecated.}
 \usage{
 foliage.litter.Liski2006(Mf, spec, reg, min)
 }
@@ -14,7 +14,7 @@ foliage.litter.Liski2006(Mf, spec, reg, min)
 \item{reg}{Region (1= Northern Finland or 2= Southern Finland)}
 }
 \description{
-Calculates foliage litter based on the older approach, with one less option (min)
+Calculates foliage litter based on the older approach, with one less option (min). Deprecated.
 }
 \references{
 Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).

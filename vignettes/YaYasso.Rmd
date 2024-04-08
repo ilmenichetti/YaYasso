@@ -42,7 +42,7 @@ We can now run a basic simulation with these data:
 ```{r}
 # EXAMPLE of fixed model ##
 # Modified yasso07 C. Sierra general model WITH environmental effect
-yassofix <- Yasso07Modelfi(years,
+yassofix <- Yasso07.Modelfi(years,
                            C0=rep(0,5), #initial carbon
                            AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
                            In=Litter,#litter C input (same length as years)
@@ -65,6 +65,6 @@ legend("topleft", c("A","W","E","N", "H"), lty=1, col=1:5, bty="n", n = 2)
 
 ```{r}
 #plot respiration
-matplot(years, Rt, type="l", ylab="Resiration", lty=1, col=1:2)
+matplot(years, Rt, type="l", ylab="Respiration", lty=1, col=1:2)
 ```
 

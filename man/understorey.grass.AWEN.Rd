@@ -2,22 +2,27 @@
 % Please edit documentation in R/litterfluxes_AWEN.r
 \name{understorey.grass.AWEN}
 \alias{understorey.grass.AWEN}
-\title{Calculates the AWEN proportions of grass biomass}
+\title{Calculates the AWEN proportions of grass litter}
 \usage{
-understorey.grass.AWEN(Lg, above)
+understorey.grass.AWEN(Lg, comp)
 }
 \arguments{
 \item{Lg}{grass biomass}
+
+\item{comp}{compartment, abv = above, bel = below ????}
 }
 \value{
 the mass of the four AWEN components
 }
 \description{
-Calculates the AWEN proportions of grass biomass
+Calculates the AWEN proportions of grass litter
 }
 \references{
 Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
 \link{understorey.grass.litter}
+}
+\author{
+Boris Tupek
 }

@@ -7,7 +7,7 @@
 wheat.AWEN(Lwheat)
 }
 \arguments{
-\item{Lwheat}{wheat biomass}
+\item{Lwheat}{wheat litter biomass}
 }
 \value{
 the mass of the four AWEN components
@@ -20,4 +20,7 @@ Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
 \link{foliage.litter}
+}
+\author{
+Boris Tupek
 }

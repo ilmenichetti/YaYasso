@@ -21,3 +21,6 @@ Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 \seealso{
 \link{branches.litter}
 }
+\author{
+Boris Tupek
+}

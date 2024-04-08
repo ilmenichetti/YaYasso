@@ -7,7 +7,7 @@
 understorey.bryoph.AWEN(Lm)
 }
 \arguments{
-\item{Lm}{moss biomass}
+\item{Lm}{moss litter biomass}
 }
 \value{
 the mass of the four AWEN components
@@ -20,4 +20,7 @@ Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
 \link{understorey.bryoph.litter}
+}
+\author{
+Boris Tupek
 }

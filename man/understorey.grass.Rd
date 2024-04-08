@@ -7,7 +7,7 @@
 understorey.grass(cov, comp, reg)
 }
 \arguments{
-\item{cov}{coverage, %}
+\item{cov}{coverage, % ???? it's probably not % but 0 to 1 ratio!!!!}
 
 \item{comp}{compartment, abv = above, bel = below ????}
 

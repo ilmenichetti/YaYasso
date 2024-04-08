@@ -7,6 +7,8 @@
 fineroot.litter.reg(Mfr, reg)
 }
 \arguments{
+\item{Mfr}{mass of fine roots???}
+
 \item{reg}{Region (1= Northern Finland or 2= Southern Finland)}
 }
 \description{

@@ -7,7 +7,7 @@
 fineroot.linear(Mf, spec)
 }
 \arguments{
-\item{Mf}{mass of roots (any mass unit)}
+\item{Mf}{mass of foliage (any mass unit)}
 
 \item{spec}{tree species, 1 = Pine, 2 = Spruce, 3 = Birch}
 }

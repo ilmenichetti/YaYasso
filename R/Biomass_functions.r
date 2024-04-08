@@ -418,7 +418,7 @@ petersson.birch.below <-  function(d13rm) {
 ##  weight of fine roots [kg] on tree level    ======================= FUNCTIONS
 
 #' Fine root based on root mass
-#' @param Mf mass of roots (any mass unit)
+#' @param Mf mass of foliage (any mass unit)
 #' @param spec tree species, 1 = Pine, 2 = Spruce, 3 = Birch
 #' @references ?????????? not sure at all!!!  Helmisaari, H.-S., Derome, J., Nöjd, P. & Kukkola, M. Fine root biomass in relation to site and stand characteristics in Norway spruce and Scots pine stands. Tree Physiol. 27, 1493–1504 (2007).
 fineroot.linear <- function(Mf,spec) {
@@ -546,7 +546,7 @@ fineroot.stand.volume.OLD <- function(vol) {
 # Salemaa, M., Hamberg, L., Kalinauskaite, N., Korpela, L., Lindroos, A-J., Nöjd, P., & Tonteri, T. (2013). Understorey vegetation on level II plots during 1998-2009. In L. Merilä, & S. Jortikka (Eds.), Forest Condition Monitoring in Finland - National Report. The Finnish Forest Research Institute The Finnish Forest Research Institute. http://urn.fi/URN:NBN:fi:metla-201305087568
 
 #' Understorey vegetation functions, developed by Lehtonen based on data from Salemaa, M., et. al 2013
-#' @param cov coverage, %
+#' @param cov coverage, % ???? it's probably not % but 0 to 1 ratio!!!!
 #' @param comp compartment, abv = above, bel = below ????
 #' @param reg region (1 = south 2 = north Finland ????)
 #' @references ?????? probably missing, data source could be Salemaa, M., Hamberg, L., Kalinauskaite, N., Korpela, L., Lindroos, A-J., Nöjd, P., & Tonteri, T. (2013). Understorey vegetation on level II plots during 1998-2009. In L. Merilä, & S. Jortikka (Eds.), Forest Condition Monitoring in Finland - National Report. The Finnish Forest Research Institute The Finnish Forest Research Institute. http://urn.fi/URN:NBN:fi:metla-201305087568
