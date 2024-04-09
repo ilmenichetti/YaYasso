@@ -7,7 +7,7 @@
 understorey.grass.OLD(cov, comp, reg)
 }
 \arguments{
-\item{cov}{coverage, % ???? it's probably not % but 0 to 1 ratio!!!!}
+\item{cov}{coverage, as 0 to 1 ratio}
 
 \item{comp}{compartment, abv = above, bel = below ????}
 

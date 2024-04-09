@@ -7,7 +7,7 @@
 yasso07.SS(
   WS,
   clim,
-  wetlands = "n",
+  wetlands = FALSE,
   In_ave,
   ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031, kH = 0.0017),
   pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99, p5 = 0, p6 = 0.01, p7 = 0, p8 = 0,
@@ -21,17 +21,66 @@ yasso07.SS(
 )
 }
 \arguments{
-\item{clim}{a vector containing the mean values of MT, TA, PR_mm as in \link{Yasso07Modelfi}. If clim = 1 ignored. Since we are considering steady states, climate must be constant}
+\item{WS}{woody size, for example 0 no effect  for nonwoody, 2 finewoody, 20 coarse woody (cm)}
 
-\item{wetlands}{if wetlands = "y", apply 35% reduction of decomposition se Kleinen et al. (2021). default is "n"}
+\item{clim}{a vector containing the mean values of MT, TA, PR_mm as in \link{Yasso07.Modelfi}. If clim = 1 ignored. Since we are considering steady states, climate must be constant}
+
+\item{wetlands}{if wetlands = TRUE, apply 35% reduction of decomposition se Kleinen et al. (2021). default is FALSE}
 
 \item{In_ave}{average AWEN inputs}
+
+\item{ksY}{a vector with the decomposition constants of the five Yasso decomposing pools, default c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031, kH = 0.0017)}
+
+\item{pY}{a vector with the transfers (including feedback) between the five
+Yasso pools, default  pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99, p5
+= 0, p6 = 0.01, p7 = 0, p8 = 0, p9 = 0.03, p10 = 0, p11 = 0.01, p12 = 0.92,
+pH = 0.0045),}
+
+\item{beta1}{temperature dependence parameter}
+
+\item{beta2}{temperature dependence parameter}
+
+\item{gamma}{precipitation dependence parameter}
+
+\item{delta1}{Woody litter size dependence parameters (cm^-1)}
+
+\item{delta2}{Woody litter size dependence parameters (cm^-1)}
+
+\item{r}{Woody litter size dependence parameters (adimensional)}
 }
 \description{
 The function is just a wrapper for the example in \link{yasso.matrix.fun}, to calculate the steady state by solving the matrix model definition
 }
+\examples{
+years=seq(1:10)
+Litter= cbind(years, matrix(rep(c(2,2,2,2, 0), each = 10), nrow = 10))
+PR_mm=rep(200, 10)
+MT= rep(10,10)
+TA= rep(2,10)
+
+yassofix <- Yasso07.Modelfi(years,
+                           C0=rep(0,5), #initial carbon
+                           AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
+                           In=Litter,#litter C input (same length as years)
+                           xi = 1, # only xi = 1  will replace climate data no climate effect,
+                           MT=MT,#MeanTemperature
+                           TA=TA, #TemperatureAmplitude
+                           PR_mm=PR_mm,#Precipitation_mm)
+                           WS=2)
+
+Ct=getC(yassofix)
+Rt=getReleaseFlux(yassofix) #respiration
+
+}
 \references{
-Ťupek, B. et al. Modeling boreal forest&rsquo;s mineral soil and peat C stock dynamics with Yasso07 model coupled with updated moisture modifier. EGUsphere 2023, 1–34 (2023).
+Tuomi, M., Rasinmäki, J., Repo, A., Vanhala, P., & Liski, J. (2011). soil carbon model yasso07 graphical user interface.. https://doi.org/10.48550/arxiv.1105.4961
+
+Ťupek, B. et al. Modeling boreal forest&rsquo;s mineral soil and peat C stock dynamics with Yasso07 model coupled with updated moisture modifier. EGUsphere 2023, 1–34 (2023). #'
+
+Kleinen, T., Gromov, S., Steil, B., & Brovkin, V. (2021). atmospheric methane underestimated in future climate projections. Environmental Research Letters, 16(9), 094006. https://doi.org/10.1088/1748-9326/ac1814
+}
+\seealso{
+\link{Yasso07.Modelfi.month}
 }
 \author{
 Lorenzo Menichetti, lorenzo.menichetti@luke.fi

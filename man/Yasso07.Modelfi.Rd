@@ -33,14 +33,16 @@ Yasso07.Modelfi(
 
 \item{ksY}{a vector with the decomposition constants of the five Yasso decomposing pools, default c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031, kH = 0.0017)}
 
-\item{pY}{a vector with the transfers (including feedbacks) between the five
-Yasso pools, defailt  pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99, p5
+\item{pY}{a vector with the transfers (including feedback) between the five
+Yasso pools, default  pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99, p5
 = 0, p6 = 0.01, p7 = 0, p8 = 0, p9 = 0.03, p10 = 0, p11 = 0.01, p12 = 0.92,
 pH = 0.0045),}
 
 \item{beta1}{temperature dependence parameter}
 
 \item{beta2}{temperature dependence parameter}
+
+\item{gamma}{precipitation dependence parameter}
 
 \item{delta1}{Woody litter size dependence parameters (cm^-1)}
 
@@ -58,9 +60,9 @@ pH = 0.0045),}
 
 \item{xi_modifier}{linear modifier of the climatic effect on decomposition, if = 1 effect is null. Used mostly for model calibration.}
 
-\item{MT}{Annual mean temperature (vector of length t) (cat('\u00B0') C)}
+\item{MT}{Annual mean temperature (vector of length t) (cat('\eqn{^\circ}0') C)}
 
-\item{TA}{Temperature Amplitude = (mothly temp. range)/2  (cat('\u00B0') C) (vector of length t)}
+\item{TA}{Temperature Amplitude = (mothly temp. range)/2  (cat('\eqn{^\circ}0') C) (vector of length t)}
 
 \item{PR_mm, }{Annual precipitation_mm (vector of length t)}
 
@@ -69,8 +71,6 @@ pH = 0.0045),}
 \item{solver}{the solver used by deSolve to solve the linear ODE system, called by SoiLR, default is = deSolve.lsoda.wrapper,}
 
 \item{pass}{= FALSE}
-
-\item{gammma}{precipitation dependence parameter}
 }
 \description{
 The function relies on the soilR implementation, and it generates a model object that needs then to be solved by soilR functions (see examples)
@@ -82,7 +82,7 @@ PR_mm=rep(200, 10)
 MT= rep(10,10)
 TA= rep(2,10)
 
-yassofix <- Yasso07Modelfi(years,
+yassofix <- Yasso07.Modelfi(years,
                            C0=rep(0,5), #initial carbon
                            AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
                            In=Litter,#litter C input (same length as years)
@@ -100,7 +100,7 @@ Rt=getReleaseFlux(yassofix) #respiration
 Ťupek, B. et al. Modeling boreal forest&rsquo;s mineral soil and peat C stock dynamics with Yasso07 model coupled with updated moisture modifier. EGUsphere 2023, 1–34 (2023).
 }
 \seealso{
-\link{Yasso07Modelfi.month}
+\link{Yasso07.Modelfi.month}
 }
 \author{
 Boris Tupek, boris.tupek@luke.fi

@@ -7,7 +7,7 @@
 understorey.bryoph.OLD(cov, reg)
 }
 \arguments{
-\item{cov}{coverage, % ???? it's probably not % but 0 to 1 ratio!!!!}
+\item{cov}{coverage, as 0 to 1 ratio}
 
 \item{reg}{region (1 = south 2 = north Finland ????)}
 }

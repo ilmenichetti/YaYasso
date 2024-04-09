@@ -546,7 +546,7 @@ fineroot.stand.volume.OLD <- function(vol) {
 # Salemaa, M., Hamberg, L., Kalinauskaite, N., Korpela, L., Lindroos, A-J., Nöjd, P., & Tonteri, T. (2013). Understorey vegetation on level II plots during 1998-2009. In L. Merilä, & S. Jortikka (Eds.), Forest Condition Monitoring in Finland - National Report. The Finnish Forest Research Institute The Finnish Forest Research Institute. http://urn.fi/URN:NBN:fi:metla-201305087568
 
 #' Understorey vegetation functions, developed by Lehtonen based on data from Salemaa, M., et. al 2013
-#' @param cov coverage, % ???? it's probably not % but 0 to 1 ratio!!!!
+#' @param cov coverage, as 0 to 1 ratio
 #' @param comp compartment, abv = above, bel = below ????
 #' @param reg region (1 = south 2 = north Finland ????)
 #' @references ?????? probably missing, data source could be Salemaa, M., Hamberg, L., Kalinauskaite, N., Korpela, L., Lindroos, A-J., Nöjd, P., & Tonteri, T. (2013). Understorey vegetation on level II plots during 1998-2009. In L. Merilä, & S. Jortikka (Eds.), Forest Condition Monitoring in Finland - National Report. The Finnish Forest Research Institute The Finnish Forest Research Institute. http://urn.fi/URN:NBN:fi:metla-201305087568

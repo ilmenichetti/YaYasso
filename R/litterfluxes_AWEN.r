@@ -547,19 +547,21 @@ understorey.herb.litter <- function(mass,comp){
 
 
 
-#' Calculates the biomass of the understorey based on % cover, uplands soils.
+#' Calculates the biomass of the understorey based on %% cover, uplands soils.
+#' @description Calculates the biomass of the understorey based on %% cover, uplands soils.
 #'
 #' @param p_lich
 #' @param p_bryoph
 #' @param p_shrubs
 #' @param p_grasses
-#' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves). For boradleaves the functions are missing, it relies on the same functions than in pine forests
-#' @return a vector with biomass of briophytes, lichens, shrubs and grasses, vallues in g m^-2
-#' @references Muukkonen, P. et al. Relationship between biomass and percentage cover in understorey vegetation of boreal coniferous forests. Silva Fenn. 40, (2006).
+#' @param spec tree species, 1 = pine 2 = spruce, 3 = residues (broadleaves). For broadleaves the functions are missing, it relies on the same functions than in pine forests
+#' @return a vector with biomass of briophytes, lichens, shrubs and grasses, values in g m^-2
+#' @references reference Muukkonen, P. et al. Relationship between biomass and percentage cover in understorey vegetation of boreal coniferous forests. Silva Fenn. 40, (2006).
+#'
+#' @author author Boris Tupek, Lorenzo Menichetti
 understorey.biomass <- function(p_lich, p_bryoph, p_shrubs, p_grasses, spec){
 
   #function introduced by Lorenzo Menichetti, 2023
-
   eq1=function(p, b_0, b_1) {p^2/(b_0+b_1*p)^2}
   eq2=function(p, b_0) {b_0*p}
 

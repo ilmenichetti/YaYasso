@@ -20,16 +20,15 @@
 #' @description
 #' The function relies on the soilR implementation, and it generates a model object that needs then to be solved by soilR functions (see examples)
 #'
-#'
 #' @param t time (years)
 #' @param ksY a vector with the decomposition constants of the five Yasso decomposing pools, default c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031, kH = 0.0017)
-#' @param pY a vector with the transfers (including feedbacks) between the five
-#'   Yasso pools, defailt  pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99, p5
+#' @param pY a vector with the transfers (including feedback) between the five
+#'   Yasso pools, default  pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99, p5
 #'   = 0, p6 = 0.01, p7 = 0, p8 = 0, p9 = 0.03, p10 = 0, p11 = 0.01, p12 = 0.92,
 #'   pH = 0.0045),
 #' @param beta1  temperature dependence parameter
 #' @param beta2 temperature dependence parameter
-#' @param gammma  precipitation dependence parameter
+#' @param gamma  precipitation dependence parameter
 #' @param delta1  Woody litter size dependence parameters (cm^-1)
 #' @param delta2  Woody litter size dependence parameters (cm^-1)
 #' @param r  Woody litter size dependence parameters (adimensional)
@@ -38,8 +37,8 @@
 #' @param AWEN 5 element vector, fractionation of plant C litter input to yasso AWEN pools
 #' @param xi  climate scaling, if xi = FALSE then the model will scale decomposition based on temperature and precipitation data, otherwise it will ignore it (xi = TRUE or xi = 1 is equivalent to setting the xi scaling factor to 1)
 #' @param xi_modifier  linear modifier of the climatic effect on decomposition, if = 1 effect is null. Used mostly for model calibration.
-#' @param MT Annual mean temperature (vector of length t) (cat('\u00B0') C)
-#' @param TA  Temperature Amplitude = (mothly temp. range)/2  (cat('\u00B0') C) (vector of length t)
+#' @param MT Annual mean temperature (vector of length t) (cat('\eqn{^\circ}0') C)
+#' @param TA  Temperature Amplitude = (mothly temp. range)/2  (cat('\eqn{^\circ}0') C) (vector of length t)
 #' @param PR_mm, Annual precipitation_mm (vector of length t)
 #' @param WS woody size, for example 0 no effect  for nonwoody, 2 finewoody, 20 coarse woody (cm)
 #' @param solver the solver used by deSolve to solve the linear ODE system, called by SoiLR, default is = deSolve.lsoda.wrapper,
@@ -55,7 +54,7 @@
 #' MT= rep(10,10)
 #' TA= rep(2,10)
 #'
-#' yassofix <- Yasso07Modelfi(years,
+#' yassofix <- Yasso07.Modelfi(years,
 #'                            C0=rep(0,5), #initial carbon
 #'                            AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
 #'                            In=Litter,#litter C input (same length as years)
@@ -68,7 +67,7 @@
 #' Ct=getC(yassofix)
 #' Rt=getReleaseFlux(yassofix) #respiration
 #'
-#' @seealso \link{Yasso07Modelfi.month}
+#' @seealso \link{Yasso07.Modelfi.month}
 Yasso07.Modelfi <- function(t, #years
                             #decomposition rates
                             ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
@@ -195,19 +194,24 @@ Yasso07.Modelfi <- function(t, #years
 
 
 
-
-
 #' Yasso07 model implemented as a matrix (to solve its steady state)
 #'
 #' @description
 #' The function generates the structural matrix of the model
 #'
-#' @param clim a vector containing the mean values of MT, TA, PR_mm as in \link{Yasso07Modelfi}. If clim = 1 ignored. Since we are considering steady states, climate must be constant
-#' @param wetlands if wetlands = "y", apply 35% reduction of decomposition se Kleinen et al. (2021). default is "n"
+#' @param clim a vector containing the mean values of MT, TA, PR_mm as in \link{Yasso07.Modelfi}. If clim = 1 ignored. Since we are considering steady states, climate must be constant
+#' @param wetlands if wetlands = TRUE, apply 35% reduction of decomposition se Kleinen et al. (2021). default is FALSE
 #' @param A.print if A.print = "y", prints the structural matrix, "n" ignored
 #'
-#' @inherit Yasso07Modelfi
-#' @references Ťupek, B. et al. Modeling boreal forest&rsquo;s mineral soil and peat C stock dynamics with Yasso07 model coupled with updated moisture modifier. EGUsphere 2023, 1–34 (2023).
+#' @inherit Yasso07.Modelfi
+#'
+#' @references
+#' Tuomi, M., Rasinmäki, J., Repo, A., Vanhala, P., & Liski, J. (2011). soil carbon model yasso07 graphical user interface.. https://doi.org/10.48550/arxiv.1105.4961
+#'
+#' Ťupek, B. et al. Modeling boreal forest&rsquo;s mineral soil and peat C stock dynamics with Yasso07 model coupled with updated moisture modifier. EGUsphere 2023, 1–34 (2023). #'
+#'
+#' Kleinen, T., Gromov, S., Steil, B., & Brovkin, V. (2021). atmospheric methane underestimated in future climate projections. Environmental Research Letters, 16(9), 094006. https://doi.org/10.1088/1748-9326/ac1814
+#'
 #' @author Boris Tupek, boris.tupek@@luke.fi
 #' @return
 #'
@@ -218,7 +222,7 @@ Yasso07.Modelfi <- function(t, #years
 
 yasso.matrix.fun <- function(WS,# 0,2,20 cm, when 0 ignored
                              clim, #MT, TA, PR_mm, if clim = 1 ignored
-                             wetlands = "n", # if wetlands = "y", apply 35% reduction of decomposition se Kleinen et al. (2021)
+                             wetlands = FALSE, # if wetlands = "y", apply 35% reduction of decomposition se Kleinen et al. (2021)
                              A.print, #if A.print = "y", prints the structural matrix, "n" ignored
                              #decomposition rates
                              ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
@@ -258,7 +262,7 @@ yasso.matrix.fun <- function(WS,# 0,2,20 cm, when 0 ignored
 
   AYS = Ap %*% abs(diag(ksY))
 
-  if(wetlands=="y"){
+  if(wetlands==TRUE){
     AYS = Ap %*% abs(diag(0.35*ksY))
     return(AYS)
   }
@@ -325,6 +329,7 @@ yasso.matrix.fun <- function(WS,# 0,2,20 cm, when 0 ignored
 #' The function is just a wrapper for the example in \link{yasso.matrix.fun}, to calculate the steady state by solving the matrix model definition
 #'
 #' @inherit yasso.matrix.fun
+#' @inherit Yasso07.Modelfi
 #' @param In_ave average AWEN inputs
 #' @author Lorenzo Menichetti, lorenzo.menichetti@@luke.fi
 #' @return
@@ -333,7 +338,7 @@ yasso.matrix.fun <- function(WS,# 0,2,20 cm, when 0 ignored
 #' yasso07.SS(WS = 2, clim = c(5, 500, 7), In_ave = c(2, 2, 2, 2, 0))
 yasso07.SS <- function(WS,# 0,2,20 cm, when 0 ignored
                        clim, #MT,  PR_mm, TA, if clim = 1 ignored
-                       wetlands = "n", # if wetlands = "y", apply 35% reduction of decomposition se Kleinen et al. (2021)
+                       wetlands = FALSE, # if wetlands = T, apply 35% reduction of decomposition se Kleinen et al. (2021)
                        In_ave, #average inputs
                        #decomposition rates
                        ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
@@ -383,13 +388,17 @@ yasso07.SS <- function(WS,# 0,2,20 cm, when 0 ignored
 #' @param t months (1/12 of year)
 #' @return
 #' @examples
-#' @seealso \link{Yasso07Modelfi}
+#' @seealso \link{Yasso07.Modelfi}
+#' @references
+#' Tuomi, M., Rasinmäki, J., Repo, A., Vanhala, P., & Liski, J. (2011). soil carbon model yasso07 graphical user interface.. https://doi.org/10.48550/arxiv.1105.4961
+#'
+#' Kleinen, T., Gromov, S., Steil, B., & Brovkin, V. (2021). atmospheric methane underestimated in future climate projections. Environmental Research Letters, 16(9), 094006. https://doi.org/10.1088/1748-9326/ac1814
 #Yasso07 model as in Tuomi et al. 2011 ecological applications
 Yasso07.Modelfi.month <- function(t, #months 1 month 1/12 of year
                                   #decomposition rates
                                   ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
                                           kH = 0.0017)/12, #decrease decomposition rates by 12!!!
-                                  wetlands, # if wetlands = "y" decrease kSY down to 35% (Goll et al. 2015, Kleinen et al. 2021)
+                                  wetlands = FALSE, # if wetlands = T decrease kSY down to 35% (Goll et al. 2015, Kleinen et al. 2021)
                                   #transfers and feedbacks
                                   pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99,
                                          p5 = 0, p6 = 0.01, p7 = 0, p8 = 0, p9 = 0.03, p10 = 0,
@@ -418,7 +427,7 @@ Yasso07.Modelfi.month <- function(t, #months 1 month 1/12 of year
   t_end = max(t)
 
 
-  if (wetlands == "y") {
+  if (wetlands == TRUE) {
     ksY = 0.35*ksY
     #return(ksY)
   }
