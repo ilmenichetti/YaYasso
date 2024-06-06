@@ -7,10 +7,16 @@
 stump.litter(Mst, spec)
 }
 \arguments{
-\item{Mst}{Mass stumps (unitless, usually in Mg ha$^{-1}$)}
+\item{Mst}{Mass stumps (usually in Mg ha$^{-1}$)}
 
 \item{spec}{tree species, 1=pine 2=spruce, 3=residues (broadleaves)}
 }
+\value{
+litter inputs (mass) from a mass of stumps, to be passed to the AWEN partitioning function
+}
 \description{
 Calculates stump bark litter
+}
+\seealso{
+\code{\link{stem.AWEN}}
 }

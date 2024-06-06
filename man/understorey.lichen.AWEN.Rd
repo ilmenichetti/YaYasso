@@ -9,18 +9,9 @@ understorey.lichen.AWEN(Ll)
 \arguments{
 \item{Ll}{lichens litter biomass}
 }
-\value{
-the mass of the four AWEN components
-}
 \description{
 Calculates the AWEN proportions of lichens biomass
 }
-\references{
-Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
-}
 \seealso{
-\link{understorey.lichen.litter}
-}
-\author{
-Boris Tupek
+\code{\link{understorey.lichen.litter}}
 }

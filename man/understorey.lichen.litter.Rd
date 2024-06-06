@@ -2,13 +2,19 @@
 % Please edit documentation in R/litterfluxes_AWEN.r
 \name{understorey.lichen.litter}
 \alias{understorey.lichen.litter}
-\title{Calculates the biomass of the understorey lichens}
+\title{Calculates the litter input of the understorey lichens}
 \usage{
 understorey.lichen.litter(mass)
 }
+\arguments{
+\item{mass}{mass of lichens}
+}
+\value{
+litter inputs (mass) from a mass of lichens, to be passed to the AWEN partitioning function
+}
 \description{
-Calculates the biomass of the understorey lichens
+Calculates the litter input of the understorey lichens
 }
 \seealso{
-\link{understorey.lichen}
+\code{\link{understorey.lichen}}  \code{\link{understorey.lichen.AWEN}}
 }

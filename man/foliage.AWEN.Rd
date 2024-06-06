@@ -21,7 +21,7 @@ Calculates the AWEN proportins of foliage biomass
 Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
-\link{foliage.litter}
+\code{\link{foliage.litter}}
 }
 \author{
 Boris Tupek

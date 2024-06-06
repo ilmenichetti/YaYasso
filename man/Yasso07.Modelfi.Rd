@@ -72,6 +72,9 @@ pH = 0.0045),}
 
 \item{pass}{= FALSE}
 }
+\value{
+a model object to be utilized within the \code{SoilR} package.
+}
 \description{
 The function relies on the soilR implementation, and it generates a model object that needs then to be solved by soilR functions (see examples)
 }
@@ -84,7 +87,8 @@ TA= rep(2,10)
 
 yassofix <- Yasso07.Modelfi(years,
                            C0=rep(0,5), #initial carbon
-                           AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
+                           AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to YASSO AWEN pools,
+                           # this depends on plant organ and species
                            In=Litter,#litter C input (same length as years)
                            xi = 1, # only xi = 1  will replace climate data no climate effect,
                            MT=MT,#MeanTemperature
@@ -100,7 +104,7 @@ Rt=getReleaseFlux(yassofix) #respiration
 Ťupek, B. et al. Modeling boreal forest&rsquo;s mineral soil and peat C stock dynamics with Yasso07 model coupled with updated moisture modifier. EGUsphere 2023, 1–34 (2023).
 }
 \seealso{
-\link{Yasso07.Modelfi.month}
+\code{\link{Yasso07.Modelfi.month}}
 }
 \author{
 Boris Tupek, boris.tupek@luke.fi

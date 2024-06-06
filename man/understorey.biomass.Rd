@@ -2,18 +2,26 @@
 % Please edit documentation in R/litterfluxes_AWEN.r
 \name{understorey.biomass}
 \alias{understorey.biomass}
-\title{Calculates the biomass of the understorey based on %% cover, uplands soils.}
+\title{Calculates the biomass of the understorey based on \% cover, uplands soils.}
 \usage{
 understorey.biomass(p_lich, p_bryoph, p_shrubs, p_grasses, spec)
 }
 \arguments{
+\item{p_lich}{coverage of lichens (ratio)}
+
+\item{p_bryoph}{coverage of bryphites (ratio)}
+
+\item{p_shrubs}{coverage of shrubs (ratio)}
+
+\item{p_grasses}{coverage of grasses (ratio)}
+
 \item{spec}{tree species, 1 = pine 2 = spruce, 3 = residues (broadleaves). For broadleaves the functions are missing, it relies on the same functions than in pine forests}
 }
 \value{
 a vector with biomass of briophytes, lichens, shrubs and grasses, values in g m^-2
 }
 \description{
-Calculates the biomass of the understorey based on %% cover, uplands soils.
+Calculates the biomass of the understorey based on \% cover, uplands soils.
 }
 \references{
 reference Muukkonen, P. et al. Relationship between biomass and percentage cover in understorey vegetation of boreal coniferous forests. Silva Fenn. 40, (2006).

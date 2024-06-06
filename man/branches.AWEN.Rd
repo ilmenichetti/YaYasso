@@ -19,7 +19,7 @@ Calculates the AWEN proportions of branches biomass
 Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
-\link{branches.litter}
+\code{\link{branches.litter}}
 }
 \author{
 Boris Tupek

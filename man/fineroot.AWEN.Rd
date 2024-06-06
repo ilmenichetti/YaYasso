@@ -21,7 +21,7 @@ Calculates the AWEN proportins of fine roots biomass
 Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
-\link{fineroot.litter.reg} \link{fineroot.litter.tsum}
+\code{\link{fineroot.litter.reg}} \code{\link{fineroot.litter.tsum}}
 }
 \author{
 Boris Tupek

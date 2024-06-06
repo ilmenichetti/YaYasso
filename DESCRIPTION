@@ -1,6 +1,6 @@
 Package: YaYasso
 Type: Package
-Title: The package (Yet another Yasso) is a collection of function to combine with the decomposition model Yasso to simulate the C stocks of a commercial stand.
+Title: Yet another Yasso is a collection of function to combine with the decomposition model Yasso to simulate the C stocks of a commercial stand
 Version: 0.1.0
 Author: Lorenzo Menichetti, Boris Tupek, Aleksi Lehtonen
 Maintainer: Lorenzo Menichetti <ilmenichetti@gmail.comt>
@@ -14,6 +14,5 @@ Suggests:
     knitr,
     rmarkdown
 Depends:
-    SoilR,
-    deSolve
+    SoilR
 VignetteBuilder: knitr

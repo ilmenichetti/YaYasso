@@ -2,13 +2,19 @@
 % Please edit documentation in R/litterfluxes_AWEN.r
 \name{understorey.bryoph.litter}
 \alias{understorey.bryoph.litter}
-\title{Calculates the biomass of the understorey bryophytes}
+\title{Calculates the litter input of the understorey bryophytes}
 \usage{
 understorey.bryoph.litter(mass)
 }
+\arguments{
+\item{mass}{mass of bryophytes}
+}
+\value{
+litter inputs (mass) from a mass of bryophytes, to be passed to the AWEN partitioning function
+}
 \description{
-Calculates the biomass of the understorey bryophytes
+Calculates the litter input of the understorey bryophytes
 }
 \seealso{
-\link{understorey.bryoph}
+\code{\link{understorey.bryoph}}  \code{\link{understorey.bryoph.AWEN}}
 }

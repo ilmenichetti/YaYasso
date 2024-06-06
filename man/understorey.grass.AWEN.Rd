@@ -9,7 +9,7 @@ understorey.grass.AWEN(Lg, comp)
 \arguments{
 \item{Lg}{grass biomass}
 
-\item{comp}{compartment, abv = above, bel = below ????}
+\item{comp}{compartment, abv = above, bel = below}
 }
 \value{
 the mass of the four AWEN components
@@ -21,7 +21,7 @@ Calculates the AWEN proportions of grass litter
 Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
-\link{understorey.grass.litter}
+\code{\link{understorey.grass.litter}}
 }
 \author{
 Boris Tupek

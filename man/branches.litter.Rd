@@ -7,10 +7,16 @@
 branches.litter(Mb, spec)
 }
 \arguments{
-\item{Mb}{Mass living branches (unitless, usually in Mg ha$^{-1}$)}
+\item{Mb}{Mass living branches (usually in Mg ha$^{-1}$)}
 
 \item{spec}{tree species, 1=pine 2=spruce, 3=residues (broadleaves)}
 }
+\value{
+litter inputs (mass) from a mass of branches, to be passed to the AWEN partitioning function
+}
 \description{
 Calculates branch litter
+}
+\seealso{
+\code{\link{branches.AWEN}}
 }

@@ -2,13 +2,21 @@
 % Please edit documentation in R/litterfluxes_AWEN.r
 \name{understorey.grass.litter}
 \alias{understorey.grass.litter}
-\title{Calculates the biomass of the understorey grasses}
+\title{Calculates the litter input of the understorey grasses}
 \usage{
 understorey.grass.litter(mass, comp)
 }
+\arguments{
+\item{mass}{mass of grasses}
+
+\item{comp}{compartment, abv = above, bel = below}
+}
+\value{
+litter inputs (mass) from a mass of grasses, to be passed to the AWEN partitioning function
+}
 \description{
-Calculates the biomass of the understorey grasses
+Calculates the litter input of the understorey grasses
 }
 \seealso{
-\link{understorey.grass}
+\code{\link{understorey.grass}}  \code{\link{understorey.grass.AWEN}}
 }

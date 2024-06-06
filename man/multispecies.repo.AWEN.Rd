@@ -25,7 +25,7 @@ selecting the specific option
 Repo, A., Böttcher, H., Kindermann, G., & Liski, J. (2014). sustainability of forest bioenergy in europe: land‐use‐related carbon dioxide emissions of forest harvest residues. GCB bioenergy, 7(4), 877-887. https://doi.org/10.1111/gcbb.12179
 }
 \seealso{
-\link{foliage.AWEN, fineroot.AWEN, branches.AWEN}
+\code{\link{foliage.AWEN}} \code{\link{fineroot.AWEN}} \code{\link{branches.AWEN}}
 }
 \author{
 Lorenzo Menichetti

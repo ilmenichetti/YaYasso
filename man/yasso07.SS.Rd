@@ -25,7 +25,7 @@ yasso07.SS(
 
 \item{clim}{a vector containing the mean values of MT, TA, PR_mm as in \link{Yasso07.Modelfi}. If clim = 1 ignored. Since we are considering steady states, climate must be constant}
 
-\item{wetlands}{if wetlands = TRUE, apply 35% reduction of decomposition se Kleinen et al. (2021). default is FALSE}
+\item{wetlands}{if wetlands = TRUE, apply 35\% reduction of decomposition se Kleinen et al. (2021). default is FALSE}
 
 \item{In_ave}{average AWEN inputs}
 
@@ -48,29 +48,14 @@ pH = 0.0045),}
 
 \item{r}{Woody litter size dependence parameters (adimensional)}
 }
+\value{
+structural matrix modified by woody size and climate
+}
 \description{
 The function is just a wrapper for the example in \link{yasso.matrix.fun}, to calculate the steady state by solving the matrix model definition
 }
 \examples{
-years=seq(1:10)
-Litter= cbind(years, matrix(rep(c(2,2,2,2, 0), each = 10), nrow = 10))
-PR_mm=rep(200, 10)
-MT= rep(10,10)
-TA= rep(2,10)
-
-yassofix <- Yasso07.Modelfi(years,
-                           C0=rep(0,5), #initial carbon
-                           AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
-                           In=Litter,#litter C input (same length as years)
-                           xi = 1, # only xi = 1  will replace climate data no climate effect,
-                           MT=MT,#MeanTemperature
-                           TA=TA, #TemperatureAmplitude
-                           PR_mm=PR_mm,#Precipitation_mm)
-                           WS=2)
-
-Ct=getC(yassofix)
-Rt=getReleaseFlux(yassofix) #respiration
-
+yasso07.SS(WS = 2, clim = c(5, 500, 7), In_ave = c(2, 2, 2, 2, 0))
 }
 \references{
 Tuomi, M., Rasinmäki, J., Repo, A., Vanhala, P., & Liski, J. (2011). soil carbon model yasso07 graphical user interface.. https://doi.org/10.48550/arxiv.1105.4961
@@ -80,7 +65,7 @@ Tuomi, M., Rasinmäki, J., Repo, A., Vanhala, P., & Liski, J. (2011). soil carbo
 Kleinen, T., Gromov, S., Steil, B., & Brovkin, V. (2021). atmospheric methane underestimated in future climate projections. Environmental Research Letters, 16(9), 094006. https://doi.org/10.1088/1748-9326/ac1814
 }
 \seealso{
-\link{Yasso07.Modelfi.month}
+\code{\link{Yasso07.Modelfi.month}}
 }
 \author{
 Lorenzo Menichetti, lorenzo.menichetti@luke.fi

@@ -9,17 +9,8 @@ shit.AWEN(Lshit)
 \arguments{
 \item{Lshit}{cow dung biomass}
 }
-\value{
-the mass of the four AWEN components
-}
 \description{
 Calculates the AWEN proportions of cow dung biomass
-}
-\references{
-Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
-}
-\seealso{
-\link{foliage.litter}
 }
 \author{
 Boris Tupek

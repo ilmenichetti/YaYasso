@@ -7,10 +7,16 @@
 bark.litter(Ms, spec)
 }
 \arguments{
-\item{Ms}{Mass bark (unitless, usually in Mg ha$^{-1}$)}
+\item{Ms}{Mass bark (usually in Mg ha$^{-1}$)}
 
 \item{spec}{tree species, 1=pine 2=spruce, 3=residues (broadleaves)}
 }
+\value{
+litter inputs (mass) from a mass of bark, to be passed to the AWEN partitioning function
+}
 \description{
 Calculates bark litter
+}
+\seealso{
+\code{\link{stem.AWEN}}
 }

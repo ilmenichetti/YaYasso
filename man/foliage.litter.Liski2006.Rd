@@ -4,14 +4,17 @@
 \alias{foliage.litter.Liski2006}
 \title{Calculates foliage litter based on the older approach, with one less option (min). Deprecated.}
 \usage{
-foliage.litter.Liski2006(Mf, spec, reg, min)
+foliage.litter.Liski2006(Mf, spec, reg)
 }
 \arguments{
-\item{Mf}{mass of living foliage (unitless, usually in Mg ha$^{-1}$)}
+\item{Mf}{mass of living foliage (usually in Mg ha$^{-1}$)}
 
 \item{spec}{tree species, 1=pine 2=spruce, 3=residues (broadleaves)}
 
 \item{reg}{Region (1= Northern Finland or 2= Southern Finland)}
+}
+\value{
+litter inputs (mass) from a mass of leaves, to be passed to the AWEN partitioning function
 }
 \description{
 Calculates foliage litter based on the older approach, with one less option (min). Deprecated.
@@ -20,5 +23,5 @@ Calculates foliage litter based on the older approach, with one less option (min
 Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).
 }
 \seealso{
-\link{foliage.AWEN}
+\code{\link{foliage.AWEN}}
 }

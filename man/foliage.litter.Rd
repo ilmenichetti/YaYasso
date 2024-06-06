@@ -15,6 +15,9 @@ foliage.litter(Mf, spec, reg, min)
 
 \item{min}{mineral soil, TRUE/FALSE}
 }
+\value{
+litter inputs (mass) from a mass of leaves, to be passed to the AWEN partitioning function
+}
 \description{
 Calculates foliage litter
 }
@@ -22,5 +25,5 @@ Calculates foliage litter
 Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).
 }
 \seealso{
-\link{foliage.AWEN}
+\code{\link{foliage.AWEN}}
 }

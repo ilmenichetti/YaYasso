@@ -7,10 +7,16 @@
 fineroot.litter.reg(Mfr, reg)
 }
 \arguments{
-\item{Mfr}{mass of fine roots???}
+\item{Mfr}{mass of fine roots}
 
 \item{reg}{Region (1= Northern Finland or 2= Southern Finland)}
 }
+\value{
+litter inputs (mass) from a mass of fine roots, to be passed to the AWEN partitioning function
+}
 \description{
 Calculates fine root litter
+}
+\seealso{
+\code{\link{fineroot.AWEN}}
 }

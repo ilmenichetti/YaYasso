@@ -7,11 +7,16 @@
 understorey.dwarfshrub.litter(mass, comp)
 }
 \arguments{
-\item{comp}{compartment, abv = above, bel = below ????}
+\item{mass}{mass of shrubs}
+
+\item{comp}{compartment, abv = above, bel = below}
+}
+\value{
+biomass of dwarf shrubs
 }
 \description{
 Calculates the biomass of the understorey dwarf shrubs
 }
 \seealso{
-\link{understorey.dwarfshrub}
+\code{\link{understorey.dwarfshrub}}
 }

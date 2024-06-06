@@ -45,7 +45,7 @@
 #' @param pass = FALSE
 #' @references Ťupek, B. et al. Modeling boreal forest&rsquo;s mineral soil and peat C stock dynamics with Yasso07 model coupled with updated moisture modifier. EGUsphere 2023, 1–34 (2023).
 #' @author Boris Tupek, boris.tupek@@luke.fi
-#' @return
+#' @return a model object to be utilized within the \code{SoilR} package.
 #'
 #' @examples
 #' years=seq(1:10)
@@ -56,7 +56,8 @@
 #'
 #' yassofix <- Yasso07.Modelfi(years,
 #'                            C0=rep(0,5), #initial carbon
-#'                            AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
+#'                            AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to YASSO AWEN pools,
+#'                            # this depends on plant organ and species
 #'                            In=Litter,#litter C input (same length as years)
 #'                            xi = 1, # only xi = 1  will replace climate data no climate effect,
 #'                            MT=MT,#MeanTemperature
@@ -67,7 +68,7 @@
 #' Ct=getC(yassofix)
 #' Rt=getReleaseFlux(yassofix) #respiration
 #'
-#' @seealso \link{Yasso07.Modelfi.month}
+#' @seealso \code{\link{Yasso07.Modelfi.month}}
 Yasso07.Modelfi <- function(t, #years
                             #decomposition rates
                             ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
@@ -200,7 +201,7 @@ Yasso07.Modelfi <- function(t, #years
 #' The function generates the structural matrix of the model
 #'
 #' @param clim a vector containing the mean values of MT, TA, PR_mm as in \link{Yasso07.Modelfi}. If clim = 1 ignored. Since we are considering steady states, climate must be constant
-#' @param wetlands if wetlands = TRUE, apply 35% reduction of decomposition se Kleinen et al. (2021). default is FALSE
+#' @param wetlands if wetlands = TRUE, apply 35\% reduction of decomposition se Kleinen et al. (2021). default is FALSE
 #' @param A.print if A.print = "y", prints the structural matrix, "n" ignored
 #'
 #' @inherit Yasso07.Modelfi
@@ -213,16 +214,17 @@ Yasso07.Modelfi <- function(t, #years
 #' Kleinen, T., Gromov, S., Steil, B., & Brovkin, V. (2021). atmospheric methane underestimated in future climate projections. Environmental Research Letters, 16(9), 094006. https://doi.org/10.1088/1748-9326/ac1814
 #'
 #' @author Boris Tupek, boris.tupek@@luke.fi
-#' @return
+#' @return structural matrix modified by woody size and climate
 #'
-#' @example
+#' @examples
 #' ### steady state calculation
 #' AYS.ws <- yasso.matrix.fun(WS = 2, clim = c(5, 500, 7), A.print = "n")
-#' xss=-1*solve(AYS.ws)%*%u.Li #inverse of matrix solve(B)
+#' # xss=-1*solve(AYS.ws)%*%u.Li #inverse of matrix solve(B)
 
 yasso.matrix.fun <- function(WS,# 0,2,20 cm, when 0 ignored
                              clim, #MT, TA, PR_mm, if clim = 1 ignored
-                             wetlands = FALSE, # if wetlands = "y", apply 35% reduction of decomposition se Kleinen et al. (2021)
+                             wetlands = FALSE, # if wetlands = "y", apply 35% reduction of decomposition
+                             # see Kleinen et al. (2021)
                              A.print, #if A.print = "y", prints the structural matrix, "n" ignored
                              #decomposition rates
                              ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
@@ -334,11 +336,12 @@ yasso.matrix.fun <- function(WS,# 0,2,20 cm, when 0 ignored
 #' @author Lorenzo Menichetti, lorenzo.menichetti@@luke.fi
 #' @return
 #'
-#' @example
+#' @examples
 #' yasso07.SS(WS = 2, clim = c(5, 500, 7), In_ave = c(2, 2, 2, 2, 0))
 yasso07.SS <- function(WS,# 0,2,20 cm, when 0 ignored
                        clim, #MT,  PR_mm, TA, if clim = 1 ignored
-                       wetlands = FALSE, # if wetlands = T, apply 35% reduction of decomposition se Kleinen et al. (2021)
+                       wetlands = FALSE, # if wetlands = T, apply 35% reduction of decomposition
+                       # see Kleinen et al. (2021)
                        In_ave, #average inputs
                        #decomposition rates
                        ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
@@ -386,9 +389,9 @@ yasso07.SS <- function(WS,# 0,2,20 cm, when 0 ignored
 #'
 #' @inherit Yasso07.Modelfi
 #' @param t months (1/12 of year)
+#' @param wetlands if wetlands = T decrease kSY down to 35\% (Goll et al. 2015, Kleinen et al. 2021)
 #' @return
-#' @examples
-#' @seealso \link{Yasso07.Modelfi}
+#' @seealso \code{\link{Yasso07.Modelfi}}
 #' @references
 #' Tuomi, M., Rasinmäki, J., Repo, A., Vanhala, P., & Liski, J. (2011). soil carbon model yasso07 graphical user interface.. https://doi.org/10.48550/arxiv.1105.4961
 #'
@@ -398,7 +401,7 @@ Yasso07.Modelfi.month <- function(t, #months 1 month 1/12 of year
                                   #decomposition rates
                                   ksY = c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031,
                                           kH = 0.0017)/12, #decrease decomposition rates by 12!!!
-                                  wetlands = FALSE, # if wetlands = T decrease kSY down to 35% (Goll et al. 2015, Kleinen et al. 2021)
+                                  wetlands = FALSE, # if wetlands = T decrease kSY down to 35\% (Goll et al. 2015, Kleinen et al. 2021)
                                   #transfers and feedbacks
                                   pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99,
                                          p5 = 0, p6 = 0.01, p7 = 0, p8 = 0, p9 = 0.03, p10 = 0,

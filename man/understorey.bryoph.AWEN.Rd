@@ -9,17 +9,11 @@ understorey.bryoph.AWEN(Lm)
 \arguments{
 \item{Lm}{moss litter biomass}
 }
-\value{
-the mass of the four AWEN components
-}
 \description{
 Calculates the AWEN proportions of bryophytes (was: mosses) biomass
 }
-\references{
-Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
-}
 \seealso{
-\link{understorey.bryoph.litter}
+\code{\link{understorey.bryoph.litter}}
 }
 \author{
 Boris Tupek

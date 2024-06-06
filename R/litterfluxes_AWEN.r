@@ -18,9 +18,8 @@
 #' @param reg Region (1= Northern Finland or 2= Southern Finland)
 #' @param min mineral soil, TRUE/FALSE
 #' @references Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).
-#' @return
-#' @examples
-#' @seealso \link{foliage.AWEN}
+#' @return litter inputs (mass) from a mass of leaves, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{foliage.AWEN}}
 foliage.litter <- function(Mf, spec, reg, min) {
   if (spec==1 & reg==1 & min==T) {
     return(Mf*0.278)}
@@ -41,14 +40,13 @@ foliage.litter <- function(Mf, spec, reg, min) {
 
 #' Calculates foliage litter based on the older approach, with one less option (min). Deprecated.
 #'
-#' @param Mf mass of living foliage (unitless, usually in Mg ha$^{-1}$)
+#' @param Mf mass of living foliage (usually in Mg ha$^{-1}$)
 #' @param spec tree species, 1=pine 2=spruce, 3=residues (broadleaves)
 #' @param reg Region (1= Northern Finland or 2= Southern Finland)
 #' @references Liski, J. et al. Carbon accumulation in Finland’s forests 1922–2004 – an estimate obtained by combination of forest inventory data with modelling of biomass, litter and soil. Ann. For. Sci. 63, 687–697 (2006).
-#' @return
-#' @examples
-#' @seealso \link{foliage.AWEN}
-foliage.litter.Liski2006 <- function(Mf, spec, reg, min) {
+#' @return litter inputs (mass) from a mass of leaves, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{foliage.AWEN}}
+foliage.litter.Liski2006 <- function(Mf, spec, reg) {
   if (spec==1) {
     if (reg==1) {
       return(Mf*0.22)}
@@ -70,10 +68,10 @@ foliage.litter.Liski2006 <- function(Mf, spec, reg, min) {
 
 #' Calculates branch litter
 #'
-#' @param Mb Mass living branches (unitless, usually in Mg ha$^{-1}$)
+#' @param Mb Mass living branches (usually in Mg ha$^{-1}$)
 #' @inheritParams foliage.litter
-#' @return
-#' @examples
+#' @return litter inputs (mass) from a mass of branches, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{branches.AWEN}}
 branches.litter <- function(Mb, spec) {
   if (spec==1) {
           return(Mb*0.02)}
@@ -87,10 +85,10 @@ branches.litter <- function(Mb, spec) {
 # the bark of the stump
 #' Calculates stump bark litter
 #'
-#' @param Mst Mass stumps (unitless, usually in Mg ha$^{-1}$)
+#' @param Mst Mass stumps (usually in Mg ha$^{-1}$)
 #' @inheritParams foliage.litter
-#' @return
-#' @examples
+#' @return litter inputs (mass) from a mass of stumps, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{stem.AWEN}}
 stump.litter <- function(Mst, spec) {
   if (spec==1) {
           return(Mst*0.0029)}
@@ -102,10 +100,10 @@ stump.litter <- function(Mst, spec) {
 
 #' Calculates root litter
 #'
-#' @param Mr Mass living roots (unitless, usually in Mg ha$^{-1}$)
+#' @param Mr Mass roots (usually in Mg ha$^{-1}$)
 #' @inheritParams foliage.litter
-#' @return
-#' @examples
+#' @return litter inputs (mass) from a mass of roots, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{branches.AWEN}}
 root.litter <- function(Mr, spec) {
   if (spec==1) {
           return(Mr*0.0184)}
@@ -117,10 +115,10 @@ root.litter <- function(Mr, spec) {
 
 #' Calculates bark litter
 #'
-#' @param Ms Mass bark (unitless, usually in Mg ha$^{-1}$)
+#' @param Ms Mass bark (usually in Mg ha$^{-1}$)
 #' @inheritParams foliage.litter
-#' @return
-#' @examples
+#' @return litter inputs (mass) from a mass of bark, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{stem.AWEN}}
 bark.litter <- function(Ms, spec) {
   if (spec==1) {
           return(Ms*0.0052)}
@@ -135,10 +133,10 @@ bark.litter <- function(Ms, spec) {
 
 #' Calculates fine root litter
 #'
-#' @param Mfr mass of fine roots???
+#' @param Mfr mass of fine roots
 #' @inheritParams foliage.litter
-#' @return
-#' @examples
+#' @return litter inputs (mass) from a mass of fine roots, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{fineroot.AWEN}}
 fineroot.litter.reg <- function(Mfr,reg) {
   if (reg==1) {
           return(Mfr*0.85)}
@@ -153,8 +151,8 @@ fineroot.litter.reg <- function(Mfr,reg) {
 #'
 #' @inheritParams fineroot.litter.reg
 #' @param tsum temperature sum
-#' @return
-#' @references
+#' @return litter inputs (mass) from a mass of fine roots, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{fineroot.AWEN}}
 fineroot.litter.tsum <- function(Mfr, tsum) {
   if (tsum>=1200) {
           return(Mfr*0.85)}
@@ -174,7 +172,6 @@ fineroot.litter.tsum <- function(Mfr, tsum) {
 #'
 #' @param mass mass of organic matter
 #' @returns a scalar, mass of C
-#' @examples
 carbon <- function(mass) {
   return(mass*0.5)
 }
@@ -194,10 +191,10 @@ carbon <- function(mass) {
 #' @param Lf leaves biomass
 #' @param spec tree species
 #' @returns the mass of the four AWEN components
-#' @examples
 #' @references Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
-#' @seealso \link{foliage.litter}
+#' @seealso \code{\link{foliage.litter}}
 #' @author Boris Tupek
+#'
 foliage.AWEN <- function(Lf, spec) {
 
   fol.AWEN <- matrix(0,nrow=length(Lf), ncol=4)
@@ -229,9 +226,8 @@ fol.AWEN[,4][ko] <- 0.2951*Lf[ko]
 #'
 #' @param Lfr fine roots biomass
 #' @param spec tree species
-#' @examples
 #' @inherit foliage.AWEN
-#' @seealso \link{fineroot.litter.reg} \link{fineroot.litter.tsum}
+#' @seealso \code{\link{fineroot.litter.reg}} \code{\link{fineroot.litter.tsum}}
 #' @author Boris Tupek
 fineroot.AWEN <- function(Lfr, spec) {
 
@@ -265,9 +261,8 @@ fr.AWEN[,4][ko] <- 0.2951*Lfr[ko]
 #' Calculates the AWEN proportions of branches biomass
 #'
 #' @param Lb branches biomass
-#' @examples
 #' @inherit foliage.AWEN
-#' @seealso \link{branches.litter}
+#' @seealso \code{\link{branches.litter}}
 #' @author Boris Tupek
 branches.AWEN <- function(Lb) {
    fb.AWEN <- matrix(0,nrow=length(Lb), ncol=4)
@@ -294,10 +289,9 @@ return(fb.AWEN)
 
 #' Calculates the AWEN proportions of stems biomass
 #'
-#' @param Lst branches biomass
-#' @param spec tree species tree species
-#' @return
-#' @examples
+#' @param Lst stem biomass
+#' @param spec tree species
+#' @return AWEN proportions of stem biomass
 #' @inherit foliage.AWEN
 stem.AWEN <- function(Lst, spec) {
 
@@ -328,11 +322,10 @@ st.AWEN[,4][ko] <- 0.5*(0.32+0.22)*Lst[ko]
 #' Calculates the AWEN proportions of grass litter
 #'
 #' @param Lg grass biomass
-#' @param comp
-#' @examples
+#' @param comp compartment, abv = above, bel = below
 #' @inherit foliage.AWEN
 #' @inherit understorey.dwarfshrub
-#' @seealso \link{understorey.grass.litter}
+#' @seealso \code{\link{understorey.grass.litter}}
 #' @author Boris Tupek
 understorey.grass.AWEN <- function(Lg, comp) {
   grass.AWEN <- matrix(0, nrow = length(Lg), ncol = 4)
@@ -363,33 +356,13 @@ understorey.grass.AWEN <- function(Lg, comp) {
   return(grass.AWEN)
 }
 
-# understorey.grass.AWEN <- function(Lg, above) {
-#   grass.AWEN <- matrix(0,nrow=length(Lg), ncol=4)
-#   a <- (1:length(Lg))[above==1]
-#   b <- (1:length(Lg))[above==0]
-#
-#   grass.AWEN[,1][a] <- 0.273*Lg[a]
-#   grass.AWEN[,2][a] <- 0.427518*Lg[a]
-#   grass.AWEN[,3][a] <- 0.274482*Lg[a]
-#   grass.AWEN[,4][a] <- 0.025*Lg[a]
-#
-#   grass.AWEN[,1][b] <- 0.273*Lg[b]
-#   grass.AWEN[,2][b] <- 0.506844*Lg[b]
-#   grass.AWEN[,3][b] <- 0.195156*Lg[b]
-#   grass.AWEN[,4][b] <- 0.025*Lg[b]
-#
-#   return(grass.AWEN)
-# }
-
 
 
 ### Note this is lichen (jäkälä)
 #' Calculates the AWEN proportions of lichens biomass
 #'
 #' @param Ll lichens litter biomass
-#' @examples
-#' @inherit foliage.AWEN
-#' @seealso \link{understorey.lichen.litter}
+#' @seealso \code{\link{understorey.lichen.litter}}
 understorey.lichen.AWEN <- function(Ll) {
  lichen.AWEN <- matrix(0,nrow=length(Ll), ncol=4)
 
@@ -404,9 +377,7 @@ return(lichen.AWEN)
 #' Calculates the AWEN proportions of bryophytes (was: mosses) biomass
 #'
 #' @param Lm moss litter biomass
-#' @examples
-#' @inherit foliage.AWEN
-#' @seealso \link{understorey.bryoph.litter}
+#' @seealso \code{\link{understorey.bryoph.litter}}
 #' @author Boris Tupek
 understorey.bryoph.AWEN <- function(Lm) {
  moss.AWEN <- matrix(0,nrow=length(Lm), ncol=4)
@@ -421,8 +392,6 @@ return(moss.AWEN)
 #' Calculates the AWEN proportions of wheat biomass
 #'
 #' @param Lwheat wheat litter biomass
-#' @examples
-#' @inherit foliage.AWEN
 #' @author Boris Tupek
 wheat.AWEN <- function(Lwheat) {
   wh.AWEN <- matrix(0,nrow=length(Lwheat), ncol=4)
@@ -438,8 +407,6 @@ wh.AWEN[,4] <- 0.131759*Lwheat
 #' Calculates the AWEN proportions of barley biomass
 #'
 #' @param Lbarley barley litter biomass
-#' @examples
-#' @inherit foliage.AWEN
 #' @author Boris Tupek
 barley.AWEN <- function(Lbarley) {
   bar.AWEN <- matrix(0,nrow=length(Lbarley), ncol=4)
@@ -455,8 +422,6 @@ bar.AWEN[,4] <- 0.075972*Lbarley
 #' Calculates the AWEN proportions of cow dung biomass
 #'
 #' @param Lshit cow dung biomass
-#' @examples
-#' @inherit foliage.AWEN
 #' @author Boris Tupek
 shit.AWEN <- function(Lshit) {
   shi.AWEN <- matrix(0,nrow=length(Lshit), ncol=4)
@@ -475,11 +440,10 @@ shi.AWEN[,4] <- 0.129199*Lshit
 ##############################################
 #' Calculates the biomass of the understorey dwarf shrubs
 #'
-#' @param mass
-#' @param comp compartment, abv = above, bel = below ????
-#' @return
-#' @examples
-#' @seealso \link{understorey.dwarfshrub}
+#' @param mass mass of shrubs
+#' @param comp compartment, abv = above, bel = below
+#' @return biomass of dwarf shrubs
+#' @seealso \code{\link{understorey.dwarfshrub}}
 understorey.dwarfshrub.litter <- function(mass, comp) {
      if (comp=='abv'){
     return(0.37*mass) }
@@ -489,42 +453,40 @@ understorey.dwarfshrub.litter <- function(mass, comp) {
  }
 
 # here calculating bel litter
-# Varpujen hienojuurien osuus maanalaisesta kokonaisbiomassasta on keskimäärin 7 %.
+# Varpujen hienojuurien osuus maanalaisesta kokonaisbiomassasta on keskimäärin 7\%.
 # 1/1.7 = 0.5882353
 # maavarret 20v 0.05
 # tr (93*0.05*0.975+7*0.87*0.5882353) / 100 = 0.08116103
 # Hei,
 # tässä ehdotus, en tiedä onko tarpeellinen.
 
-# Tutkin Heljä-Siskon kairanäytteitä ICP level2 koealoilta. Totaali maanalainen (jonka mukaan cover biomassa mallit tehtiin) sisältää 7 % hienojuuria ja 93% maavarsia. Hienojuurista 13% on kuolleita ja 87% eläviä. Maavarsista 2.5 % on kuolleita. Mitä mieltä olet, pitääkö tämä kuolleiden osuus poistaa aineistosta.
+# Tutkin Heljä-Siskon kairanäytteitä ICP level2 koealoilta. Totaali maanalainen (jonka mukaan cover biomassa mallit tehtiin) sisältää 7 \% hienojuuria ja 93\% maavarsia. Hienojuurista 13\% on kuolleita ja 87\% eläviä. Maavarsista 2.5 \% on kuolleita. Mitä mieltä olet, pitääkö tämä kuolleiden osuus poistaa aineistosta.
 # Maija
 
-#' Calculates the biomass of the understorey bryophytes
+#' Calculates the litter input of the understorey bryophytes
 #'
-#' @param mass
-#' @return
-#' @examples
-#' @seealso \link{understorey.bryoph}
+#' @param mass mass of bryophytes
+#' @return litter inputs (mass) from a mass of bryophytes, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{understorey.bryoph}}  \code{\link{understorey.bryoph.AWEN}}
 understorey.bryoph.litter <- function(mass) {
     return(0.417*mass)
 }
 
-#' Calculates the biomass of the understorey lichens
+#' Calculates the litter input of the understorey lichens
 #'
-#' @param mass
-#' @return
-#' @examples
-#' @seealso \link{understorey.lichen}
+#' @param mass mass of lichens
+#' @return litter inputs (mass) from a mass of lichens, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{understorey.lichen}}  \code{\link{understorey.lichen.AWEN}}
 understorey.lichen.litter <- function(mass) {
     return(0.1*mass)
 }
 
-#' Calculates the biomass of the understorey grasses
+#' Calculates the litter input of the understorey grasses
 #'
-#' @param mass
-#' @return
-#' @examples
-#' @seealso \link{understorey.grass}
+#' @param mass mass of grasses
+#' @param comp compartment, abv = above, bel = below
+#' @return litter inputs (mass) from a mass of grasses, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{understorey.grass}}  \code{\link{understorey.grass.AWEN}}
 understorey.grass.litter <- function(mass,comp) {
      if (comp=='abv'){
     return(0.33*mass) }
@@ -532,12 +494,12 @@ understorey.grass.litter <- function(mass,comp) {
     return((1/1.7)*mass) }
 }
 
-#' Calculates the biomass of the understorey herbs
+#' Calculates the litter input of the understorey herbs
 #'
-#' @param mass
-#' @return
-#' @examples
-#' @seealso \link{understorey.herb}
+#' @param mass mass of herbs
+#' @param comp compartment, abv = above, bel = below
+#' @return litter inputs (mass) from a mass of herbs, to be passed to the AWEN partitioning function
+#' @seealso \code{\link{understorey.herb}} \code{\link{understorey.grass.AWEN}}
 understorey.herb.litter <- function(mass,comp){
      if (comp=='abv'){
     return(1*mass) }
@@ -547,13 +509,13 @@ understorey.herb.litter <- function(mass,comp){
 
 
 
-#' Calculates the biomass of the understorey based on %% cover, uplands soils.
-#' @description Calculates the biomass of the understorey based on %% cover, uplands soils.
+#' Calculates the biomass of the understorey based on \% cover, uplands soils.
+#' @description Calculates the biomass of the understorey based on \% cover, uplands soils.
 #'
-#' @param p_lich
-#' @param p_bryoph
-#' @param p_shrubs
-#' @param p_grasses
+#' @param p_lich coverage of lichens (ratio)
+#' @param p_bryoph coverage of bryphites (ratio)
+#' @param p_shrubs coverage of shrubs (ratio)
+#' @param p_grasses coverage of grasses (ratio)
 #' @param spec tree species, 1 = pine 2 = spruce, 3 = residues (broadleaves). For broadleaves the functions are missing, it relies on the same functions than in pine forests
 #' @return a vector with biomass of briophytes, lichens, shrubs and grasses, values in g m^-2
 #' @references reference Muukkonen, P. et al. Relationship between biomass and percentage cover in understorey vegetation of boreal coniferous forests. Silva Fenn. 40, (2006).

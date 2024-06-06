@@ -8,9 +8,8 @@
 #' @param comp components. "coarse" = stem, branch, roots, stump; "fine" = foliage, fine roots
 #' @param type tree type, "temp.broad.ev" = temperate broadleaved evergreen, "temp.broad.sum" =  = temperate broadleaved evergreen, bor.broad.sum = boreal broadleaved summergreen, "temp" = temperate, "bor.con" = boreal coniferous
 #' @returns the mass of the four AWEN components
-#' @examples
 #' @references Repo, A., Böttcher, H., Kindermann, G., & Liski, J. (2014). sustainability of forest bioenergy in europe: land‐use‐related carbon dioxide emissions of forest harvest residues. GCB bioenergy, 7(4), 877-887. https://doi.org/10.1111/gcbb.12179
-#' @seealso \link{foliage.AWEN, fineroot.AWEN, branches.AWEN}
+#' @seealso \code{\link{foliage.AWEN}} \code{\link{fineroot.AWEN}} \code{\link{branches.AWEN}}
 #' @author Lorenzo Menichetti
 #'
 multispecies.repo.AWEN <- function(biom, comp, type) {

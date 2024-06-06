@@ -7,10 +7,16 @@
 fineroot.litter.tsum(Mfr, tsum)
 }
 \arguments{
-\item{Mfr}{mass of fine roots???}
+\item{Mfr}{mass of fine roots}
 
 \item{tsum}{temperature sum}
 }
+\value{
+litter inputs (mass) from a mass of fine roots, to be passed to the AWEN partitioning function
+}
 \description{
 Calculates fine root litter with three different options based on tsum
+}
+\seealso{
+\code{\link{fineroot.AWEN}}
 }

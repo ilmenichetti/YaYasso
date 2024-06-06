@@ -33,6 +33,8 @@ Yasso07.Modelfi.month(
 
 \item{ksY}{a vector with the decomposition constants of the five Yasso decomposing pools, default c(kA = 0.73, kW = 5.8, kE = 0.29, kN = 0.031, kH = 0.0017)}
 
+\item{wetlands}{if wetlands = T decrease kSY down to 35\% (Goll et al. 2015, Kleinen et al. 2021)}
+
 \item{pY}{a vector with the transfers (including feedback) between the five
 Yasso pools, default  pY = c(p1 = 0.48, p2 = 0.01, p3 = 0.83, p4 = 0.99, p5
 = 0, p6 = 0.01, p7 = 0, p8 = 0, p9 = 0.03, p10 = 0, p11 = 0.01, p12 = 0.92,
@@ -70,6 +72,9 @@ pH = 0.0045),}
 
 \item{pass}{= FALSE}
 }
+\value{
+a model object to be utilized within the \code{SoilR} package.
+}
 \description{
 The function relies on the soilR implementation, and it generates a model object that needs then to be solved by soilR functions (see examples)
 }
@@ -82,7 +87,8 @@ TA= rep(2,10)
 
 yassofix <- Yasso07.Modelfi(years,
                            C0=rep(0,5), #initial carbon
-                           AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to yasso AWEN pools, this depends on plant organ and species
+                           AWEN = c(0.52,0.18,0.08,0.2,0), #to separate litter to YASSO AWEN pools,
+                           # this depends on plant organ and species
                            In=Litter,#litter C input (same length as years)
                            xi = 1, # only xi = 1  will replace climate data no climate effect,
                            MT=MT,#MeanTemperature
@@ -100,7 +106,7 @@ Tuomi, M., Rasinmäki, J., Repo, A., Vanhala, P., & Liski, J. (2011). soil carbo
 Kleinen, T., Gromov, S., Steil, B., & Brovkin, V. (2021). atmospheric methane underestimated in future climate projections. Environmental Research Letters, 16(9), 094006. https://doi.org/10.1088/1748-9326/ac1814
 }
 \seealso{
-\link{Yasso07.Modelfi}
+\code{\link{Yasso07.Modelfi}}
 }
 \author{
 Boris Tupek, boris.tupek@luke.fi

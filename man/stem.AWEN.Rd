@@ -7,12 +7,12 @@
 stem.AWEN(Lst, spec)
 }
 \arguments{
-\item{Lst}{branches biomass}
+\item{Lst}{stem biomass}
 
-\item{spec}{tree species tree species}
+\item{spec}{tree species}
 }
 \value{
-the mass of the four AWEN components
+AWEN proportions of stem biomass
 }
 \description{
 Calculates the AWEN proportions of stems biomass
@@ -21,7 +21,7 @@ Calculates the AWEN proportions of stems biomass
 Yasso07 user-interface manual. J Liski, M Tuomi, J Rasinmäki - , Helsinki, 2009
 }
 \seealso{
-\link{foliage.litter}
+\code{\link{foliage.litter}}
 }
 \author{
 Boris Tupek

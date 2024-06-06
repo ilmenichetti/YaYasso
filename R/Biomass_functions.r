@@ -187,6 +187,7 @@ repola.pine.needles <- function(d13rm, ht, hlc) {
 }
 #' Repola function for spruce, needles  model 2
 #' @inherit repola.pine.needles
+#' @inherit repola.pine.stem.simp
 repola.spruce.needles <- function(d13rm, ht, hlc) {
   cl <- ht- hlc
   dk <- 2+1.25*d13rm
@@ -196,6 +197,7 @@ repola.spruce.needles <- function(d13rm, ht, hlc) {
 
 #' Repola function for birch, leaves  model 2
 #' @inherit repola.pine.needles
+#' @inherit repola.pine.stem.simp
 repola.birch.foliage <- function(d13rm, ht, hlc) {
   cl <- ht- hlc
   cr <- cl/ht
@@ -208,9 +210,15 @@ repola.birch.foliage <- function(d13rm, ht, hlc) {
 ######Marklundß
 #' Marklund function for pine, needles
 #' @inherit repola.pine.needles
+#' @inherit repola.pine.stem.simp
 #' @references Marklund L.G., Biomassafunktioner för tall, gran och björk i Sve-rige, Sveriges lantbruksuniversitet, Rapporter-Skog 45 (1988) 1–73
 marklund.pine.needles <-  function(d13rm, ht) {
   return(exp(-3.4781 + 12.1095*d13rm/(d13rm+7) -1.565*log(ht) +0.0413*ht ) ) }
+
+#' Marklund function for spruce, needles
+#' @inherit repola.pine.needles
+#' @inherit repola.pine.stem.simp
+#' @references Marklund L.G., Biomassafunktioner för tall, gran och björk i Sve-rige, Sveriges lantbruksuniversitet, Rapporter-Skog 45 (1988) 1–73
 marklund.spruce.needles <-  function(d13rm, ht) {
   return(exp(-1.8551 + 9.7809*d13rm/(d13rm+12)-0.4873*log(ht)))
 }
@@ -218,12 +226,17 @@ marklund.spruce.needles <-  function(d13rm, ht) {
 #' Marklund function for spruce, needles
 #' @inherit marklund.pine.needles
 #' @inherit repola.pine.needles
+#' @inherit repola.pine.stem.simp
 marklund.spruce.needles.comp <-  function(d13rm, ht, hlc) {
   cl <- ht- hlc
   return(exp(-1.5732 + 8.4127*d13rm/(d13rm+12) -1.5628*log(ht) + 1.4032*log(cl))) }
+
+#' Marklund function for birch, branches
+#' @inherit marklund.pine.needles
+#' @inherit repola.pine.needles
+#' @inherit repola.pine.stem.simp
 marklund.birch.livbranch <- function(d13rm) {
   return(exp(-3.3633+ 10.2806*d13rm/(d13rm+ 10) )) }
-
 
 
 
@@ -232,7 +245,7 @@ marklund.birch.livbranch <- function(d13rm) {
 #' @inherit repola.pine.stem.simp
 repola.pine.needles.simp <- function(d13rm, ht) {
   dk <- 2+1.25*d13rm
-  ma.neul.m1 = function(dk, h) exp(-6.303+14.472*dk/(dk+6)-3.976*h/(h+1)+(0.109+0.118)/2)             #Model 1
+  ma.neul.m1 = function(dk, ht) exp(-6.303+14.472*dk/(dk+6)-3.976*ht/(ht+1)+(0.109+0.118)/2)             #Model 1
   return(ma.neul.m1(dk,ht))
 }
 
@@ -240,7 +253,7 @@ repola.pine.needles.simp <- function(d13rm, ht) {
 #' @inherit repola.pine.stem.simp
 repola.spruce.needles.simp <- function(d13rm, ht) {
   dk <- 2+1.25*d13rm
-  ku.neul.m1 = function(dk, h) exp(-2.994+12.251*dk/(dk+10)-3.415*h/(h+1)+(0.107+0.089/2))                #Model 1
+  ku.neul.m1 = function(dk, ht) exp(-2.994+12.251*dk/(dk+10)-3.415*ht/(ht+1)+(0.107+0.089/2))                #Model 1
   return(ku.neul.m1(dk,ht))
 }
 
@@ -260,7 +273,7 @@ repola.pine.livbranch <- function(d13rm, ht, hlc) {
   cl <- ht- hlc
   cr <- cl/ht
   dk <- 2+1.25*d13rm
-  ma.ran.m2 = function(dk, h, cl) exp(-5.166+13.085*dk/(dk+12)-5.189*h/(h+8)+1.110*log(cl)+(0.020+0.063)/2)#Model 2
+  ma.ran.m2 = function(dk, h, cl) exp(-5.166+13.085*dk/(dk+12)-5.189*ht/(ht+8)+1.110*log(cl)+(0.020+0.063)/2)#Model 2
   return(ma.ran.m2(dk,ht,cl))
 }
 
@@ -270,20 +283,19 @@ repola.spruce.livbranch <- function(d13rm, ht, hlc) {
   cl <- ht- hlc
   cr <- cl/ht
   dk <- 2+1.25*d13rm
-  ku.ran.m2 = function(dk, h, cl) exp(-3.023+12.017*dk/(dk+14)-5.722*h/(h+5)+1.033*log(cl)+(0.017+0.068)/2)  #Model 2
+  ku.ran.m2 = function(dk, ht, cl) exp(-3.023+12.017*dk/(dk+14)-5.722*ht/(ht+5)+1.033*log(cl)+(0.017+0.068)/2)  #Model 2
   return(ku.ran.m2(dk,ht,cl))
 }
 
 #' Repola function for birch, living branches,  model 2
 #' @inherit repola.pine.needles
 repola.birch.livbranch <- function(d13rm, ht, hlc) {
-  cl <- ht- hlc
+  cl <- ht - hlc
   cr <- cl/ht
   dk <- 2+1.25*d13rm
-  ko.ran.m2= function(dk, h, cl) exp(-5.067+14.614*dk/(dk+12)-5.074*h/(h+12)+0.092*cl+(0.01508+0.05663)/2)      #Model 2
+  ko.ran.m2= function(dk, ht, cl) exp(-5.067+14.614*dk/(dk+12)-5.074*ht/(ht+12)+0.092*cl+(0.01508+0.05663)/2)      #Model 2
   return(ko.ran.m2(dk,ht,cl))
 }
-
 
 
 # Functions based only on dbh & h
@@ -291,12 +303,14 @@ repola.birch.livbranch <- function(d13rm, ht, hlc) {
 #' @inherit repola.pine.needles
 repola.pine.livbranch.simp <- function(d13rm, ht) {
   dk <- 2+1.25*d13rm
+  ma.ran.m1 = function(dk, ht) exp(-6.162+15.075*dk/(dk+12)-2.618*ht/(ht+12)+(0.041+0.089)/2)             #Model 1
   return(ma.ran.m1(dk,ht))
 }
 
 #' Repola function for spruce, living branches,  model 1
 #' @inherit repola.pine.needles
 repola.spruce.livbranch.simp <- function(d13rm, ht) {
+  ku.ran.m1 = function(dk, ht) exp(-4.214+14.508*dk/(dk+13)-3.277*ht/(ht+5)+(0.039+0.081)/2)                #Model 1
   dk <- 2+1.25*d13rm
   return(ku.ran.m1(dk,ht))
 }
@@ -304,6 +318,7 @@ repola.spruce.livbranch.simp <- function(d13rm, ht) {
 #' Repola function for birch, living branches,  model 1
 #' @inherit repola.pine.needles
 repola.birch.livbranch.simp <- function(d13rm, ht) {
+  ko.ran.m1 = function(dk, ht) exp(-4.152+15.874*dk/(dk+16)-4.407*ht/(ht+10)+(0.02733+0.07662)/2)              #Model 1
   dk <- 2+1.25*d13rm
   return(ko.ran.m1(dk,ht))
 }
@@ -315,7 +330,7 @@ repola.birch.livbranch.simp <- function(d13rm, ht) {
 #' @inherit repola.pine.needles
 repola.pine.above <- function(d13rm, ht) {
   dk <- 2+1.25*d13rm
-  ma.tot.m1 = function(dk, h) exp(-3.198+9.547*dk/(dk+12)+3.241*h/(h+20)+(0.009+0.010)/2)            #Model 1
+  ma.tot.m1 = function(dk, ht) exp(-3.198+9.547*dk/(dk+12)+3.241*ht/(ht+20)+(0.009+0.010)/2)            #Model 1
   return(ma.tot.m1(dk,ht))
 }
 
@@ -323,7 +338,7 @@ repola.pine.above <- function(d13rm, ht) {
 #' @inherit repola.pine.needles
 repola.spruce.above <- function(d13rm, ht) {
   dk <- 2+1.25*d13rm
-  ku.tot.m1 = function(dk, h) exp(-1.808+9.482*dk/(dk+20)+0.469*log(h)+(0.006+0.013)/2)           #Model 1
+  ku.tot.m1 = function(dk, ht) exp(-1.808+9.482*dk/(dk+20)+0.469*log(ht)+(0.006+0.013)/2)           #Model 1
   return(ku.tot.m1(dk,ht))
 }
 
@@ -331,7 +346,7 @@ repola.spruce.above <- function(d13rm, ht) {
 #' @inherit repola.pine.needles
 repola.birch.above <- function(d13rm, ht) {
   dk <- 2+1.25*d13rm
-  ko.tot.m1 = function(dk, h) exp(-3.654+10.582*dk/(dk+12)+3.018*h/(h+22)+(0.00068+0.00727)/2) #Model 1
+  ko.tot.m1 = function(dk, ht) exp(-3.654+10.582*dk/(dk+12)+3.018*t/(ht+22)+(0.00068+0.00727)/2) #Model 1
   return(ko.tot.m1(dk,ht))
 }
 
@@ -528,6 +543,13 @@ fineroot.stand <- function(basal,decid,CNo) {
 fineroot.stand.volume <- function(vol) {
   return(exp(6.203+0.320*log(vol)+(0.530^2)/2))
 }
+
+#' Fine root biomass function, DEPRECATED (volume)
+#' @description
+#' Part of a series of functions predicting the fine root biomass of a stand
+#'
+#' @param vol stand volume (\eqn{m^3 ha^{-1}})
+#' @return fine root biomass (<2mm) in g
 
 fineroot.stand.volume.OLD <- function(vol) {
   return(exp(6.44043+0.27071*log(vol)+(0.542^2)/2))
