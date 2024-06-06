@@ -4,8 +4,7 @@ Title: Yet another Yasso is a collection of function to combine with the decompo
 Version: 0.1.0
 Author: Lorenzo Menichetti, Boris Tupek, Aleksi Lehtonen
 Maintainer: Lorenzo Menichetti <ilmenichetti@gmail.comt>
-Description: IMPORTANT: The package relies on the Ryassofortran package, which must be installed from its development GitHub with: install.packages("devtools"), devtools::install_github("YASSOmodel/Ryassofortran")
-    Use four spaces when indenting paragraphs within the Description.
+Description:The package is built around an implementation of Yasso done in SoilR, to which a collection of accessory functions to simulate model inputs were added. The package has been developed within the Natural Resources Institute Finland (Luonnonvarakeskus, LUKE). Package documentation is hopefully in a decent shape but still work in progress. Please do not hesitate to contact the maintainer if you find issues, we'll see what we can do.
 License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
